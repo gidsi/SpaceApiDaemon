@@ -1,7 +1,9 @@
 SpaceApiDaemon
 ==============
 
-First draft of the SpaceApiDaemon, a tool that provides your space with an easy to use SpaceApi.
+**Work in progress, do not use in production!**
+
+First draft of the SpaceApiDaemon, a tool that provides your space with an easy to use, valid, SpaceApi.
 
 Goal is to give more people/systems access to change values in your SpaceApi easily (example: Your new temperature sensor which is hooked to an esp gets his own access token and can update temperature readings etc. by itself).
 
