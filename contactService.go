@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"spaceapi-spec/v013"
+	"github.com/gidsi/SpaceApiSpec/v013"
 )
 
 func changePhone(w http.ResponseWriter, r *http.Request) {

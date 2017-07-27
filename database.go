@@ -3,7 +3,7 @@ package main
 import (
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-	"spaceapi-spec/v013"
+	"github.com/gidsi/SpaceApiSpec/v013"
 	"log"
 	"time"
 )

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"spaceapi-spec/v013"
+	"github.com/gidsi/SpaceApiSpec/v013"
 	"net/http"
 	"log"
 )
