@@ -14,7 +14,7 @@ type spaceApiWithTimestamp struct {
 }
 
 func writeSpaceData(data spaceapi_spec.Root) {
-	session, err := mgo.Dial("database")
+	session, err := mgo.Dial(config.MongoDbServer)
 	if err != nil {
 		panic(err)
 	}
@@ -22,7 +22,7 @@ func writeSpaceData(data spaceapi_spec.Root) {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB("spaceApi").C("spacedata")
+	c := session.DB(config.MongoDbDatabase).C("spacedata")
 	err = c.Insert(
 		spaceApiWithTimestamp{
 			data,
@@ -35,7 +35,7 @@ func writeSpaceData(data spaceapi_spec.Root) {
 }
 
 func readSpacedata() spaceapi_spec.Root {
-	session, err := mgo.Dial("database")
+	session, err := mgo.Dial(config.MongoDbServer)
 	if err != nil {
 		panic(err)
 	}
@@ -43,7 +43,7 @@ func readSpacedata() spaceapi_spec.Root {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB("spaceApi").C("spacedata")
+	c := session.DB(config.MongoDbDatabase).C("spacedata")
 	result := spaceApiWithTimestamp{}
 	err = c.Find(bson.M{}).Sort("-timestamp").One(&result)
 	if err != nil {
@@ -58,7 +58,7 @@ func checkToken(token string) bool {
 		return false
 	}
 
-	session, err := mgo.Dial("database")
+	session, err := mgo.Dial(config.MongoDbServer)
 	if err != nil {
 		panic(err)
 	}
@@ -66,7 +66,7 @@ func checkToken(token string) bool {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB("spaceApi").C("token")
+	c := session.DB(config.MongoDbDatabase).C("token")
 	result := Token{}
 	err = c.Find(bson.M{ "token": token }).One(&result)
 	if err != nil {
@@ -77,7 +77,8 @@ func checkToken(token string) bool {
 }
 
 func readToken() []Token {
-	session, err := mgo.Dial("database")
+	panic(config)
+	session, err := mgo.Dial(config.MongoDbServer)
 	if err != nil {
 		panic(err)
 	}
@@ -85,7 +86,7 @@ func readToken() []Token {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB("spaceApi").C("token")
+	c := session.DB(config.MongoDbDatabase).C("token")
 	result := []Token{}
 	err = c.Find(bson.M{}).All(&result)
 	if err != nil {
@@ -97,7 +98,7 @@ func readToken() []Token {
 
 
 func writeToken(token string) {
-	session, err := mgo.Dial("database")
+	session, err := mgo.Dial(config.MongoDbServer)
 	if err != nil {
 		panic(err)
 	}
@@ -105,7 +106,7 @@ func writeToken(token string) {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB("spaceApi").C("token")
+	c := session.DB(config.MongoDbDatabase).C("token")
 	err = c.Insert(Token{ token })
 	if err != nil {
 		log.Fatal(err)

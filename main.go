@@ -4,9 +4,22 @@ import (
 	"github.com/gidsi/SpaceApiSpec/v013"
 	"net/http"
 	"log"
+	"strconv"
+	"io/ioutil"
+	"gopkg.in/yaml.v2"
 )
 
+var config = ConfigFile{
+	Port: "8080",
+	SigningKey: "AllYourBase",
+	MongoDbServer: "localhost",
+	MongoDbDatabase: "spaceApi",
+}
+
 func main() {
+	data, _ := ioutil.ReadFile("config.yaml")
+	yaml.Unmarshal(data, &config)
+
 	tokens := readToken()
 
 	if(len(tokens) == 0) {
@@ -17,7 +30,7 @@ func main() {
 
         router := SetupRouter(IndexRoutes)
 	http.Handle("/", router)
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":" + strconv.Itoa(config.Port), router))
 }
 
 type base struct {
