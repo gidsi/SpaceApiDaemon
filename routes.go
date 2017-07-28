@@ -118,4 +118,18 @@ var IndexRoutes = Routes{
 		true,
 		changeIssueMail,
 	},
+	Route{
+		"Add Keymaster",
+		"POST",
+		"/contact/keymasters",
+		true,
+		addKeymaster,
+	},
+	Route{
+		"Remove Keymaster",
+		"DELETE",
+		"/contact/keymasters/{name}",
+		true,
+		removeKeymaster,
+	},
 }

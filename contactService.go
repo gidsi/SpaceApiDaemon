@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/gorilla/mux"
 )
 
 func changePhone(w http.ResponseWriter, r *http.Request) {
@@ -69,6 +70,39 @@ func changeIssueMail(w http.ResponseWriter, r *http.Request) {
 	value, spaceData := contactHelper(w, r)
 	spaceData.Contact.IssueMail = value
 	writeSpaceData(spaceData)
+}
+
+func addKeymaster(w http.ResponseWriter, r *http.Request) {
+	spaceData := readSpaceData()
+	if spaceData.Contact == nil {
+		spaceData.Contact = &spaceapi_spec.Contact{}
+	}
+
+	requestKeymaster := spaceapi_spec.Keymaster{}
+	createEntry(&requestKeymaster, w, r)
+
+	spaceData.Contact.Keymasters = append(spaceData.Contact.Keymasters, requestKeymaster)
+}
+
+func removeKeymaster(w http.ResponseWriter, r *http.Request) {
+	spaceData := readSpaceData()
+	if spaceData.Contact == nil {
+		spaceData.Contact = &spaceapi_spec.Contact{}
+	}
+
+	vars := mux.Vars(r)
+	for i := 0; i < len(spaceData.Contact.Keymasters); i++ {
+		if spaceData.Contact.Keymasters[i].Name == vars["name"] {
+			spaceData.Contact.Keymasters =
+				append(
+					spaceData.Contact.Keymasters[:i],
+					spaceData.Contact.Keymasters[i+1:]...
+				)
+			break
+		}
+	}
+
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func contactHelper(w http.ResponseWriter, r *http.Request) (string, spaceapi_spec.Root) {
