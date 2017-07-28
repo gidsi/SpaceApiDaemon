@@ -24,7 +24,7 @@ func SetupRouter(routes Routes) *mux.Router {
 
 func setupRoute(router *mux.Router, route Route) {
 	var handler http.Handler
-	if(route.AuthNeeded) {
+	if route.AuthNeeded {
 		handler = checkSecurity(route.Handler)
 	} else {
 		handler = Logger(route.Handler, route.Name)
@@ -44,7 +44,7 @@ func setupRoute(router *mux.Router, route Route) {
 
 func checkSecurity(inner http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if(checkToken(r.Header.Get("auth"))) {
+		if checkToken(r.Header.Get("auth")) {
 			inner.ServeHTTP(w, r)
 		} else {
 			log.Println("Provided Token not found!")
@@ -53,12 +53,12 @@ func checkSecurity(inner http.Handler) http.Handler {
 	})
 }
 
-func notFound(w http.ResponseWriter, r *http.Request) {
+func notFound(w http.ResponseWriter, _ *http.Request) {
 	log.Print("Route not found!")
 	w.WriteHeader(http.StatusNotFound)
 }
 
-func optionsHandler(w http.ResponseWriter, r *http.Request) {
+func optionsHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE")

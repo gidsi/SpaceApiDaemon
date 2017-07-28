@@ -7,10 +7,11 @@ import (
 	"strconv"
 	"io/ioutil"
 	"gopkg.in/yaml.v2"
+	"spaceapi-spec/v013"
 )
 
 var config = ConfigFile{
-	Port: "8080",
+	Port: 8080,
 	SigningKey: "AllYourBase",
 	MongoDbServer: "localhost",
 	MongoDbDatabase: "spaceApi",
@@ -52,42 +53,42 @@ type SingleValue struct {
 
 func changeBaseData(w http.ResponseWriter, r *http.Request) {
 	inputData := base{}
-	spacedata := readSpacedata()
+	spaceData := readSpaceData()
 
 	createEntry(&inputData, w, r)
 
-	spacedata.Space = inputData.Space
-	spacedata.Logo = inputData.Logo
-	spacedata.Url = inputData.Url
+	spaceData.Space = inputData.Space
+	spaceData.Logo = inputData.Logo
+	spaceData.Url = inputData.Url
 
-	writeSpaceData(spacedata)
+	writeSpaceData(spaceData)
 }
 
 func changeState(w http.ResponseWriter, r *http.Request) {
-	spacedata := readSpacedata()
+	spaceData := readSpaceData()
 
-	requestSpacedata := StateShort{}
-	createEntry(&requestSpacedata, w, r)
+	requestSpaceData := StateShort{}
+	createEntry(&requestSpaceData, w, r)
 
-	if(spacedata.State == nil) {
-		spacedata.State = &spaceapi_spec.State{}
+	if spaceData.State == nil {
+		spaceData.State = &spaceapi_spec.State{}
 	}
 
-	spacedata.State.Open = requestSpacedata.Open
-	spacedata.State.Lastchange = requestSpacedata.Lastchange
-	spacedata.State.Message = requestSpacedata.Message
-	spacedata.State.TriggerPerson = requestSpacedata.TriggerPerson
+	spaceData.State.Open = requestSpaceData.Open
+	spaceData.State.Lastchange = requestSpaceData.Lastchange
+	spaceData.State.Message = requestSpaceData.Message
+	spaceData.State.TriggerPerson = requestSpaceData.TriggerPerson
 
-	writeSpaceData(spacedata)
+	writeSpaceData(spaceData)
 }
 
 func changeLocation(w http.ResponseWriter, r *http.Request) {
-	spacedata := readSpacedata()
+	spaceData := readSpaceData()
 
-	requestSpacedata := spaceapi_spec.Location{}
-	createEntry(&requestSpacedata, w, r)
-	spacedata.Location = &requestSpacedata
+	requestSpaceData := spaceapi_spec.Location{}
+	createEntry(&requestSpaceData, w, r)
+	spaceData.Location = &requestSpaceData
 
-	writeSpaceData(spacedata)
+	writeSpaceData(spaceData)
 }
 

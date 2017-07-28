@@ -6,80 +6,80 @@ import (
 )
 
 func changePhone(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Phone = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Phone = value
+	writeSpaceData(spaceData)
 }
 
 func changeSip(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Sip = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Sip = value
+	writeSpaceData(spaceData)
 }
 
 func changeIrc(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Irc = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Irc = value
+	writeSpaceData(spaceData)
 }
 
 func changeTwitter(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Twitter = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Twitter = value
+	writeSpaceData(spaceData)
 }
 
 func changeFacebook(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Facebook = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Facebook = value
+	writeSpaceData(spaceData)
 }
 
 func changeIdentica(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Identica = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Identica = value
+	writeSpaceData(spaceData)
 }
 
 func changeFoursquare(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Foursquare = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Foursquare = value
+	writeSpaceData(spaceData)
 }
 
 func changeEmail(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Email = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Email = value
+	writeSpaceData(spaceData)
 }
 
 func changeMl(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Ml = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Ml = value
+	writeSpaceData(spaceData)
 }
 
 func changeJabber(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.Jabber = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.Jabber = value
+	writeSpaceData(spaceData)
 }
 
 func changeIssueMail(w http.ResponseWriter, r *http.Request) {
-	value, spacedata := contactHelper(w, r)
-	spacedata.Contact.IssueMail = value
-	writeSpaceData(spacedata)
+	value, spaceData := contactHelper(w, r)
+	spaceData.Contact.IssueMail = value
+	writeSpaceData(spaceData)
 }
 
 func contactHelper(w http.ResponseWriter, r *http.Request) (string, spaceapi_spec.Root) {
-	spacedata := readSpacedata()
+	spaceData := readSpaceData()
 
-	requestSpacedata := SingleValue{}
-	createEntry(&requestSpacedata, w, r)
+	requestSpaceData := SingleValue{}
+	createEntry(&requestSpaceData, w, r)
 
-	if(spacedata.Contact == nil) {
-		spacedata.Contact = &spaceapi_spec.Contact{}
+	if spaceData.Contact == nil {
+		spaceData.Contact = &spaceapi_spec.Contact{}
 	}
 
-	return requestSpacedata.Value, spacedata
+	return requestSpaceData.Value, spaceData
 }

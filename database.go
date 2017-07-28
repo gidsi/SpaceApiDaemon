@@ -22,7 +22,7 @@ func writeSpaceData(data spaceapi_spec.Root) {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB(config.MongoDbDatabase).C("spacedata")
+	c := session.DB(config.MongoDbDatabase).C("spaceData")
 	err = c.Insert(
 		spaceApiWithTimestamp{
 			data,
@@ -34,7 +34,7 @@ func writeSpaceData(data spaceapi_spec.Root) {
 	}
 }
 
-func readSpacedata() spaceapi_spec.Root {
+func readSpaceData() spaceapi_spec.Root {
 	session, err := mgo.Dial(config.MongoDbServer)
 	if err != nil {
 		panic(err)
@@ -43,7 +43,7 @@ func readSpacedata() spaceapi_spec.Root {
 
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB(config.MongoDbDatabase).C("spacedata")
+	c := session.DB(config.MongoDbDatabase).C("spaceData")
 	result := spaceApiWithTimestamp{}
 	err = c.Find(bson.M{}).Sort("-timestamp").One(&result)
 	if err != nil {
@@ -54,7 +54,7 @@ func readSpacedata() spaceapi_spec.Root {
 }
 
 func checkToken(token string) bool {
-	if(token == "") {
+	if token == "" {
 		return false
 	}
 
