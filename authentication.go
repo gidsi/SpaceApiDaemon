@@ -11,7 +11,7 @@ type Token struct {
 }
 
 func createToken() string {
-	mySigningKey := []byte("AllYourBase")
+	mySigningKey := []byte(config.SigningKey)
 
 	claims := &jwt.StandardClaims{
 		IssuedAt: time.Now().Unix(),

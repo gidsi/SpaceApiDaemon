@@ -77,7 +77,6 @@ func checkToken(token string) bool {
 }
 
 func readToken() []Token {
-	panic(config)
 	session, err := mgo.Dial(config.MongoDbServer)
 	if err != nil {
 		panic(err)
