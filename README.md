@@ -11,7 +11,7 @@ Gets all messy in golang right now, might rewrite it, or not, not sure at this m
 
 Todo:
 -----
-* add docker / docker-compose file
+* ~~add docker / docker-compose file~~
 * add an deployment and running example
 * add routes for most used values
 * force user to add a config file / signing key

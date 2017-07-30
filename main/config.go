@@ -8,7 +8,7 @@ import (
 var config = ConfigFile{
 	Port: 8080,
 	SigningKey: "AllYourBase",
-	MongoDbServer: "localhost",
+	MongoDbServer: "database",
 	MongoDbDatabase: "spaceApi",
 }
 

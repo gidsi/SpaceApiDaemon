@@ -13,7 +13,7 @@ type StateShort struct {
 }
 
 func changeState(w http.ResponseWriter, r *http.Request) {
-	spaceData := readSpaceData()
+	spaceData, _ := readSpaceData()
 
 	requestSpaceData := StateShort{}
 	createEntry(&requestSpaceData, w, r)
