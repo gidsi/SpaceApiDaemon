@@ -15,3 +15,4 @@ Todo:
 * add an deployment and running example
 * add routes for most used values
 * force user to add a config file / signing key
+* add post / delete route for access tokens 
