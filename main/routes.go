@@ -1,6 +1,8 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+)
 
 type Route struct {
 	Name       string
@@ -215,5 +217,26 @@ var IndexRoutes = Routes{
 		"/sensors/door_locked/{location}",
 		true,
 		removeDoorLocked,
+	},
+	Route{
+		"list token",
+		"GET",
+		"/token",
+		true,
+		getToken,
+	},
+	Route{
+		"Generate new token",
+		"POST",
+		"/token",
+		true,
+		addToken,
+	},
+	Route{
+		"Remove token",
+		"DELETE",
+		"/token",
+		true,
+		deleteToken,
 	},
 }

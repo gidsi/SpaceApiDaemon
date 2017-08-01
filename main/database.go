@@ -111,3 +111,19 @@ func writeToken(token string) {
 		log.Fatal(err)
 	}
 }
+
+func removeToken(token string) {
+	session, err := mgo.Dial(config.MongoDbServer)
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
+
+	session.SetMode(mgo.Monotonic, true)
+
+	c := session.DB(config.MongoDbDatabase).C("token")
+	err = c.Remove(Token{ token })
+	if err != nil {
+		log.Fatal(err)
+	}
+}

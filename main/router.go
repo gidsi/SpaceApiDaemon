@@ -44,11 +44,12 @@ func setupRoute(router *mux.Router, route Route) {
 
 func checkSecurity(inner http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if checkToken(r.Header.Get("auth")) {
+		if checkToken(r.Header.Get("Authorization")) ||
+			checkToken(r.URL.Query().Get("Authorization")) {
 			inner.ServeHTTP(w, r)
 		} else {
 			log.Println("Provided Token not found!")
-			w.WriteHeader(http.StatusNetworkAuthenticationRequired)
+			w.WriteHeader(http.StatusUnauthorized)
 		}
 	})
 }
