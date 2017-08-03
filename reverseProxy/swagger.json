@@ -1,0 +1,421 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is your spaces SpaceApi definition",
+    "version": "0.0.1",
+    "title": "SpaceApi Daemon",
+    "termsOfService": "https://example.com/daemon/terms",
+    "contact": {
+      "email": "spaceapidaemon@example.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/api",
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "root"
+        ],
+        "summary": "your space status",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SpaceApi"
+            }
+          },
+          "500": {
+            "description": "something went wrong"
+          }
+        }
+      }
+    },
+    "/base": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "basedata"
+        ],
+        "summary": "Change the space name",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/location": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "location"
+        ],
+        "summary": "Change the location of your space",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/state": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "state"
+        ],
+        "summary": "Change the location of your space",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/State"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/State"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/token": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "token"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "token"
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "token"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        }
+      }
+    },
+    "/contact": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change the spaces contact",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Token": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "QWEQWQWEQWEQWEQWEQWEQEW"
+        }
+      }
+    },
+    "Space": {
+      "type": "object",
+      "required": [
+        "space",
+        "logo",
+        "url"
+      ],
+      "properties": {
+        "space": {
+          "type": "string",
+          "example": "Chaosdorf"
+        },
+        "logo": {
+          "type": "string",
+          "example": "https://example.com/logo.png"
+        },
+        "url": {
+          "type": "string",
+          "example": "https://example.com"
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "example": "Huettenstrasse 25, 40210 Duesseldorf"
+        },
+        "lon": {
+          "type": "number",
+          "example": 52.12345
+        },
+        "lat": {
+          "type": "number",
+          "example": 7.654321
+        }
+      }
+    },
+    "Icon": {
+      "type": "object",
+      "properties": {
+        "open": {
+          "type": "string",
+          "example": "https://example.com/openicon.png"
+        },
+        "closed": {
+          "type": "string",
+          "example": "https://example.com/closedicon.png"
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "required": [
+        "open",
+        "lastchange"
+      ],
+      "properties": {
+        "open": {
+          "type": "boolean",
+          "example": true
+        },
+        "lastchange": {
+          "type": "integer",
+          "example": 123456789
+        },
+        "trigger_person": {
+          "type": "string",
+          "example": "Wau Holland"
+        },
+        "message": {
+          "type": "string",
+          "example": "first!!!"
+        }
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string",
+          "example": 4915791234567
+        },
+        "irc": {
+          "type": "string",
+          "example": "irc://irc.hackint.org/#chaosdorf"
+        },
+        "twitter": {
+          "type": "string",
+          "example": "@chaosdorf"
+        },
+        "facebook": {
+          "type": "string",
+          "example": "https://www.facebook.com/pages/riechtnachlulu"
+        },
+        "google": {
+          "type": "string",
+          "example": "g+ is dead"
+        },
+        "foursquare": {
+          "type": "string",
+          "example": "deadbeefdeadbeef"
+        },
+        "email": {
+          "type": "string",
+          "example": "info@chaosdorf.de"
+        },
+        "ml": {
+          "type": "string",
+          "example": "intern@lists.chaosdorf.de"
+        },
+        "issue_email": {
+          "type": "string",
+          "example": "support@chaosdorf.de"
+        }
+      }
+    },
+    "SpaceApi": {
+      "type": "object",
+      "properties": {
+        "space": {
+          "type": "string",
+          "example": "Chaosdorf"
+        },
+        "logo": {
+          "type": "string",
+          "example": "https://example.com/logo.png"
+        },
+        "url": {
+          "type": "string",
+          "example": "https://example.com"
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "open": {
+              "type": "boolean",
+              "example": true
+            },
+            "lastchange": {
+              "type": "integer",
+              "example": 123456789
+            },
+            "trigger_person": {
+              "type": "string",
+              "example": "Wau Holland"
+            },
+            "message": {
+              "type": "string",
+              "example": "first!!!"
+            },
+            "icon": {
+              "$ref": "#/definitions/Icon"
+            }
+          }
+        },
+        "state": {
+          "$ref": "#/definitions/State"
+        },
+        "contact": {
+          "$ref": "#/definitions/Contact"
+        },
+        "issue_report_channels": {
+          "type": "array",
+          "example": [
+            "ml"
+          ]
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about spaceApi daemon",
+    "url": "https://example.net/daemon"
+  }
+}

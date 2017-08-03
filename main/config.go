@@ -10,6 +10,7 @@ var config = ConfigFile{
 	SigningKey: "AllYourBase",
 	MongoDbServer: "database",
 	MongoDbDatabase: "spaceApi",
+	AllowedOrigins: []string { "http://localhost" },
 }
 
 type ConfigFile struct {
@@ -17,6 +18,7 @@ type ConfigFile struct {
 	SigningKey	string `yaml:"signing_key,omitempty"`
 	MongoDbServer	string `yaml:"mongodb_server,omitempty"`
 	MongoDbDatabase	string `yaml:"mongodb_database,omitempty"`
+	AllowedOrigins	[]string `yaml:"allowed_origins,omitempty"`
 }
 
 func initConfig() {

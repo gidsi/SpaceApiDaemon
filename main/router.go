@@ -4,53 +4,65 @@ import (
 	"net/http"
 	"github.com/gorilla/mux"
 	"log"
+	"strings"
+	"time"
 )
 
 func SetupRouter(routes Routes) *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
+
+	methods := make(map[string][]string)
 	for _, route := range routes {
-		setupRoute(router, route)
+		setupRouteForRouter(router, route)
+		methods[route.Pattern] = append(methods[route.Pattern], route.Method)
 	}
 
-	router.
-	Methods("OPTIONS").
-	Name("Options Handler").
-	Handler(http.HandlerFunc(optionsHandler))
+	for _, routeMethods := range methods {
+		router.
+			Methods("OPTIONS").
+			Name("Options Handler").
+			Handler(optionsHandler(append(routeMethods, "OPTIONS")))
+	}
+
 
 	router.NotFoundHandler = http.HandlerFunc(notFound)
 
 	return router
 }
 
-func setupRoute(router *mux.Router, route Route) {
-	var handler http.Handler
-	if route.AuthNeeded {
-		handler = checkSecurity(route.Handler)
-	} else {
-		handler = Logger(route.Handler, route.Name)
-	}
-
+func setupRouteForRouter(router *mux.Router, route Route) {
 	router.
 	Methods(route.Method).
 	Path(route.Pattern).
 	Name(route.Name).
-	Handler(handler)
-
-	router.
-	Methods("OPTIONS").
-	Name("Options Handler").
-	Handler(http.HandlerFunc(optionsHandler))
+	Handler(setupRoute(route))
 }
 
-func checkSecurity(inner http.Handler) http.Handler {
+// TODO: clean that mess
+func setupRoute(route Route) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if checkToken(r.Header.Get("Authorization")) ||
-			checkToken(r.URL.Query().Get("Authorization")) {
-			inner.ServeHTTP(w, r)
+		start := time.Now()
+
+		setCORSHeader([]string{ route.Method }, w, r)
+		if route.AuthNeeded {
+			if checkToken(r.Header.Get("Authorization")) ||
+				checkToken(r.URL.Query().Get("Authorization")) {
+				route.Handler.ServeHTTP(w, r)
+			} else {
+				log.Println("Provided Token not found!")
+				w.WriteHeader(http.StatusUnauthorized)
+			}
 		} else {
-			log.Println("Provided Token not found!")
-			w.WriteHeader(http.StatusUnauthorized)
+			route.Handler.ServeHTTP(w, r)
 		}
+
+		log.Printf(
+			"%s\t%s\t%s\t%s",
+			r.Method,
+			r.RequestURI,
+			route.Name,
+			time.Since(start),
+		)
 	})
 }
 
@@ -59,9 +71,26 @@ func notFound(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 }
 
-func optionsHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+func optionsHandler(methods []string) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		setCORSHeader(methods, w, r)
+		w.WriteHeader(200)
+	})
+}
+
+func setCORSHeader(methods []string, w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", checkAllowedOrigin(r))
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE")
-	w.WriteHeader(200)
+	w.Header().Set("Access-Control-Allow-Methods", strings.Join(methods[:],", "))
+}
+
+// TODO: config.AllowedOrigins should be a regular expression
+func checkAllowedOrigin(request *http.Request) string {
+	for _, b := range config.AllowedOrigins {
+        if b == request.Header.Get("Origin") {
+            return request.Header.Get("Origin")
+        }
+    }
+
+	return ""
 }

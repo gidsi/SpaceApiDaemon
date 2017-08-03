@@ -4,9 +4,24 @@ services:
     build: .
     depends_on:
       - database
-    ports:
-        - 8080:8080
+    expose:
+      - 8080
   database:
     image: mongo:latest
     volumes:
-         - /opt/spaceapidaemon/db:/data/db
+      - /opt/spaceapidaemon/db:/data/db
+  swagger:
+    image: swaggerapi/swagger-ui
+    depends_on:
+      - daemon
+    expose:
+      - 8080
+    enviroment:
+      - API_URL=http://localhost/swagger.json
+  reverse_proxy:
+    build: reverseProxy
+    depends_on:
+      - daemon
+      - swagger
+    ports:
+      - 80:80

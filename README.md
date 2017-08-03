@@ -9,10 +9,23 @@ Goal is to give more people/systems access to change values in your SpaceApi eas
 
 Gets all messy in golang right now, might rewrite it, or not, not sure at this moment.
 
+Usage
+-----
+1. Install docker and docker-compose.
+2. Clone the repo and switch into the project folder.
+3. run:
+```
+# docker-compose build
+# docker-compose up -d
+```
+4. Profit!
+
 Todo:
 -----
 * ~~add docker / docker-compose file~~
-* add an deployment and running example
+* ~~add an deployment example and running example~~
+* add a better first run experience
 * add routes for most used values
 * force user to add a config file / signing key
-* add post / delete route for access tokens 
+* ~~add post / delete route for access tokens~~
+* find a place to live for the swagger.json
