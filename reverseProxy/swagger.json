@@ -144,6 +144,676 @@
         }
       }
     },
+    "/contact/phone": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/sip": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/irc": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/twitter": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/facebook": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/identica": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/foursquare": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/email": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/ml": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/jabber": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/issuemail": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Change your spaces phonenumber",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/keymasters": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Adds a keymaster",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Keymaster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Keymaster"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/contact/keymasters/{name}": {
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "contact"
+        ],
+        "summary": "Delete a keymaster",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/feeds/blog": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "feeds"
+        ],
+        "summary": "Change your spaces blog",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/feeds/wiki": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "feeds"
+        ],
+        "summary": "Change your spaces wiki",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/feeds/calendar": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "feeds"
+        ],
+        "summary": "Change your spaces calendar",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/feeds/flickr": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "feeds"
+        ],
+        "summary": "Change your spaces flickr",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/issue_report_channels": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "issue report channels"
+        ],
+        "summary": "Add issue report channel",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SingleValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Keymaster"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/issue_report_channels/{name}": {
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "issue report channels"
+        ],
+        "summary": "Remove issue report channel",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/sensors/temperature/{location}": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "change temperature sensor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Feed"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
     "/token": {
       "get": {
         "security": [
@@ -172,6 +842,16 @@
         "tags": [
           "token"
         ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
         "responses": {
           "204": {
             "description": "successful operation"
@@ -196,40 +876,6 @@
           }
         }
       }
-    },
-    "/contact": {
-      "put": {
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "tags": [
-          "contact"
-        ],
-        "summary": "Change the spaces contact",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Contact"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Contact"
-            }
-          },
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -238,7 +884,55 @@
       "properties": {
         "token": {
           "type": "string",
-          "example": "QWEQWQWEQWEQWEQWEQWEQEW"
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+        }
+      }
+    },
+    "SingleValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "example": "a value"
+        }
+      }
+    },
+    "Keymaster": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Edward Snowden"
+        },
+        "irc_nick": {
+          "type": "string",
+          "example": "snowden"
+        },
+        "phone": {
+          "type": "string",
+          "example": "+15791234567"
+        },
+        "email": {
+          "type": "string",
+          "example": "info [at] freedom [dot] press"
+        },
+        "twitter": {
+          "type": "string",
+          "example": "@Snowden"
+        }
+      }
+    },
+    "Feed": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "rss"
+        },
+        "url": {
+          "type": "string",
+          "example": "https://example.com/feed.rss",
+          "required": true
         }
       }
     },
@@ -357,6 +1051,279 @@
         "issue_email": {
           "type": "string",
           "example": "support@chaosdorf.de"
+        }
+      }
+    },
+    "Temperature": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit",
+        "location"
+      ],
+      "properties": {
+        "value": {
+          "type": "number",
+          "example": 23.5
+        },
+        "unit": {
+          "type": "string",
+          "example": "°C"
+        },
+        "location": {
+          "type": "string",
+          "example": "Kitchen"
+        },
+        "name": {
+          "type": "string",
+          "example": "Kitchen Sensor"
+        },
+        "description": {
+          "type": "string",
+          "example": "Sensor! Sensor! Hey! Hey!"
+        }
+      }
+    },
+    "DoorLocked": {
+      "type": "object",
+      "required": [
+        "value",
+        "location"
+      ],
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "example": true
+        },
+        "location": {
+          "type": "string",
+          "example": "Cellar Entrance"
+        },
+        "name": {
+          "type": "string",
+          "example": "Cellar Main Door"
+        },
+        "description": {
+          "type": "string",
+          "example": "Sensor! Sensor! Hey! Hey!"
+        }
+      }
+    },
+    "Barometer": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit",
+        "location"
+      ],
+      "properties": {
+        "value": {
+          "type": "number",
+          "example": 1024
+        },
+        "unit": {
+          "type": "string",
+          "example": "hPa"
+        },
+        "location": {
+          "type": "string",
+          "example": "Outside"
+        },
+        "name": {
+          "type": "string",
+          "example": "Dosenbarometer"
+        },
+        "description": {
+          "type": "string",
+          "example": "Sensor! Sensor! Hey! Hey!"
+        }
+      }
+    },
+    "Radiation": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "dead_time": {
+          "type": "number"
+        },
+        "conversion_factor": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Radiations": {
+      "type": "object",
+      "properties": {
+        "alpha": {
+          "$ref": "#/definitions/Radiation"
+        },
+        "beta": {
+          "$ref": "#/definitions/Radiation"
+        },
+        "gamma": {
+          "$ref": "#/definitions/Radiation"
+        },
+        "beta_gamma": {
+          "$ref": "#/definitions/Radiation"
+        }
+      }
+    },
+    "Humidity": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit",
+        "location"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "BeverageSupply": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "PowerConsumption": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit",
+        "location"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ValueUnit": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "number"
+        }
+      }
+    },
+    "WindProperties": {
+      "type": "object",
+      "properties": {
+        "speed": {
+          "$ref": "#/definitions/ValueUnit"
+        },
+        "gust": {
+          "$ref": "#/definitions/ValueUnit"
+        },
+        "direction": {
+          "$ref": "#/definitions/ValueUnit"
+        },
+        "elevation": {
+          "$ref": "#/definitions/ValueUnit"
+        }
+      }
+    },
+    "Wind": {
+      "type": "object",
+      "required": [
+        "properties",
+        "location"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WindProperties"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Machine": {
+      "type": "object",
+      "required": [
+        "mac"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
         }
       }
     },
