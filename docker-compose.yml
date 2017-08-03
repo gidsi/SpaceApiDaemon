@@ -1,22 +1,22 @@
 version: "3.0"
 services:
-  daemon:
-    build: .
-    depends_on:
-      - database
-    expose:
-      - 8080
   database:
     image: mongo:latest
     volumes:
       - /opt/spaceapidaemon/db:/data/db
+  daemon:
+    build: spaceApiDaemon
+    depends_on:
+      - database
+    expose:
+      - 8080
   swagger:
     image: swaggerapi/swagger-ui
     depends_on:
       - daemon
     expose:
       - 8080
-    enviroment:
+    environment:
       - API_URL=http://localhost/swagger.json
   reverse_proxy:
     build: reverseProxy

@@ -82,6 +82,8 @@ func addKeymaster(w http.ResponseWriter, r *http.Request) {
 	createEntry(&requestKeymaster, w, r)
 
 	spaceData.Contact.Keymasters = append(spaceData.Contact.Keymasters, requestKeymaster)
+
+	writeSpaceData(spaceData)
 }
 
 func removeKeymaster(w http.ResponseWriter, r *http.Request) {
@@ -102,6 +104,7 @@ func removeKeymaster(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	writeSpaceData(spaceData)
 	w.WriteHeader(http.StatusNoContent)
 }
 

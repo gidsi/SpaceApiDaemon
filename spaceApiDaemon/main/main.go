@@ -10,6 +10,8 @@ func main() {
 	initConfig()
 	createInitToken()
 
+	log.Print(readToken())
+
 	router := SetupRouter(IndexRoutes)
 	http.Handle("/", router)
 	log.Fatal(http.ListenAndServe(":" + strconv.Itoa(config.Port), router))

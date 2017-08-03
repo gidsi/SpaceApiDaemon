@@ -14,6 +14,7 @@ func changeBaseData(w http.ResponseWriter, r *http.Request) {
 
 	createEntry(&inputData, w, r)
 
+	spaceData.Api = "0.13"
 	spaceData.Space = inputData.Space
 	spaceData.Logo = inputData.Logo
 	spaceData.Url = inputData.Url

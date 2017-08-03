@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/dgrijalva/jwt-go"
 	"time"
-	"encoding/base64"
 	"net/http"
 )
 
@@ -43,7 +42,7 @@ func createToken() string {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	ss, _ := token.SignedString(signingKey)
-	encodedToken := base64.StdEncoding.EncodeToString([]byte(ss))
+	// encodedToken := base64.StdEncoding.EncodeToString([]byte(ss))
 
-	return encodedToken
+	return ss
 }
