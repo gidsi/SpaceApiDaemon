@@ -812,6 +812,33 @@
             "description": "Invalid input"
           }
         }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "delete temperature sensor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
       }
     },
     "/token": {
@@ -1327,6 +1354,231 @@
         }
       }
     },
+    "NetworkConnection": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        },
+        "machines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "AccountBalance": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "TotalMemberCount": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "PeopleNowPresent": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "names": {
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Sensors": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          }
+        },
+        "door_locked": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DoorLocked"
+          }
+        },
+        "barometer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Barometer"
+          }
+        },
+        "radiation": {
+          "$ref": "#/definitions/Radiations"
+        },
+        "humidity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Humidity"
+          }
+        },
+        "beverage_supply": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BeverageSupply"
+          }
+        },
+        "power_consumption": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PowerConsumption"
+          }
+        },
+        "wind": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Wind"
+          }
+        },
+        "network_connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkConnection"
+          }
+        },
+        "account_balance": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountBalance"
+          }
+        },
+        "total_member_count": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TotalMemberCount"
+          }
+        },
+        "people_now_present": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeopleNowPresent"
+          }
+        }
+      }
+    },
+    "Feeds": {
+      "type": "object",
+      "properties": {
+        "blog": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feed"
+          }
+        },
+        "wiki": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feed"
+          }
+        },
+        "calendar": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feed"
+          }
+        },
+        "flickr": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feed"
+          }
+        }
+      }
+    },
+    "Cache": {
+      "properties": {
+        "schedule": {
+          "type": "string"
+        }
+      }
+    },
+    "RadioShow": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        }
+      }
+    },
     "SpaceApi": {
       "type": "object",
       "properties": {
@@ -1343,34 +1595,28 @@
           "example": "https://example.com"
         },
         "location": {
-          "type": "object",
-          "properties": {
-            "open": {
-              "type": "boolean",
-              "example": true
-            },
-            "lastchange": {
-              "type": "integer",
-              "example": 123456789
-            },
-            "trigger_person": {
-              "type": "string",
-              "example": "Wau Holland"
-            },
-            "message": {
-              "type": "string",
-              "example": "first!!!"
-            },
-            "icon": {
-              "$ref": "#/definitions/Icon"
-            }
-          }
+          "$ref": "#/definitions/Location"
         },
         "state": {
           "$ref": "#/definitions/State"
         },
         "contact": {
           "$ref": "#/definitions/Contact"
+        },
+        "sensors": {
+          "$ref": "#/definitions/Sensors"
+        },
+        "feeds": {
+          "$ref": "#/definitions/Feeds"
+        },
+        "cache": {
+          "$ref": "#/definitions/Cache"
+        },
+        "radio_show": {
+          "$ref": "#/definitions/RadioShow"
+        },
+        "projects": {
+          "type": "array"
         },
         "issue_report_channels": {
           "type": "array",
