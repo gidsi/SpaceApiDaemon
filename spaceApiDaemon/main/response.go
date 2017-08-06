@@ -32,7 +32,7 @@ func createEntry(i interface{}, w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 	} else {
-		w.WriteHeader(http.StatusCreated)
+		w.WriteHeader(http.StatusOK)
 		if err := json.NewEncoder(w).Encode(i); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			panic(err)
