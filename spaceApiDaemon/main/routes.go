@@ -219,6 +219,27 @@ var IndexRoutes = Routes{
 		removeDoorLocked,
 	},
 	Route{
+		"Add humidity sensor",
+		"POST",
+		"/sensors/humidity",
+		true,
+		addHumidity,
+	},
+	Route{
+		"change humidity sensor",
+		"PUT",
+		"/sensors/humidity/{location}",
+		true,
+		changeHumidity,
+	},
+	Route{
+		"Remove humidity sensor",
+		"DELETE",
+		"/sensors/humidity/{location}",
+		true,
+		removeHumidity,
+	},
+	Route{
 		"list token",
 		"GET",
 		"/token",

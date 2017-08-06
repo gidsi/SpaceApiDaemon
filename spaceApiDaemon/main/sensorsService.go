@@ -130,3 +130,64 @@ func removeTemperature(w http.ResponseWriter, r *http.Request) {
 
 	writeSpaceData(spaceData)
 }
+
+func addHumidity(w http.ResponseWriter, r *http.Request) {
+	spaceData, _ := readSpaceData()
+
+	requestSpaceData := spaceapi_spec.Humidity{}
+	createEntry(&requestSpaceData, w, r)
+
+	if spaceData.Sensors == nil {
+		spaceData.Sensors = &spaceapi_spec.Sensors{}
+	}
+
+	spaceData.Sensors.Humidity = append(spaceData.Sensors.Humidity, requestSpaceData)
+
+	writeSpaceData(spaceData)
+}
+
+func changeHumidity(w http.ResponseWriter, r *http.Request) {
+	spaceData, _ := readSpaceData()
+
+	requestSpaceData := spaceapi_spec.Humidity{}
+	createEntry(&requestSpaceData, w, r)
+
+	if spaceData.Sensors == nil {
+		spaceData.Sensors = &spaceapi_spec.Sensors{}
+	}
+
+	vars := mux.Vars(r)
+	for i := 0; i < len(spaceData.Sensors.Humidity); i++ {
+		if spaceData.Sensors.Humidity[i].Location == vars["location"] {
+			spaceData.Sensors.Humidity[i] = requestSpaceData
+			break
+		}
+	}
+
+	writeSpaceData(spaceData)
+}
+
+func removeHumidity(w http.ResponseWriter, r *http.Request) {
+	spaceData, _ := readSpaceData()
+
+	requestSpaceData := spaceapi_spec.Humidity{}
+	createEntry(&requestSpaceData, w, r)
+
+	if spaceData.Sensors == nil {
+		spaceData.Sensors = &spaceapi_spec.Sensors{}
+	}
+
+	vars := mux.Vars(r)
+	for i := 0; i < len(spaceData.Sensors.Humidity); i++ {
+		if spaceData.Sensors.Humidity[i].Location == vars["location"] {
+			spaceData.Sensors.Humidity =
+				append(
+					spaceData.Sensors.Humidity[:i],
+					spaceData.Sensors.Humidity[i+1:]...
+				)
+			break
+		}
+	}
+
+	writeSpaceData(spaceData)
+}
