@@ -7,7 +7,7 @@ import (
 
 var config = ConfigFile{
 	Port: 8080,
-	SigningKey: "AllYourBase",
+	SigningKey: "",
 	MongoDbServer: "database",
 	MongoDbDatabase: "spaceApi",
 	AllowedOrigins: []string { "http://localhost" },
@@ -22,6 +22,14 @@ type ConfigFile struct {
 }
 
 func initConfig() {
-	data, _ := ioutil.ReadFile("config.yaml")
+	data, err := ioutil.ReadFile("config.yaml")
 	yaml.Unmarshal(data, &config)
+
+	if err != nil {
+		panic("could not read config.yaml, will not start.")
+	}
+
+	if config.SigningKey == "" {
+		panic("Signing key not provided, please add a key with a value for \"signing_key\" to your config.yaml")
+	}
 }
