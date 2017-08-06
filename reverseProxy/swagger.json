@@ -797,7 +797,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Feed"
+              "$ref": "#/definitions/Temperature"
             }
           }
         ],
@@ -805,7 +805,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/Feed"
+              "$ref": "#/definitions/Temperature"
             }
           },
           "405": {
@@ -834,6 +834,242 @@
         "responses": {
           "204": {
             "description": "successful operation"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/sensors/temperature": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "add temperature sensor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Temperature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Temperature"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/sensors/door_locked/{location}": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "change door sensor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DoorLocked"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DoorLocked"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "delete door sensor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/sensors/door_locked": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "add temperature sensor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DoorLocked"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DoorLocked"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/sensors/humidity/{location}": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "change humidity sensor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Humidity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Humidity"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "delete humidity sensor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/sensors/humidity": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "summary": "add humidity sensor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Humidity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Humidity"
+            }
           },
           "405": {
             "description": "Invalid input"
@@ -1015,6 +1251,40 @@
         }
       }
     },
+    "SpaceFed": {
+      "type": "object",
+      "properties": {
+        "spacenet": {
+          "type": "boolean",
+          "example": false
+        },
+        "spacesaml": {
+          "type": "boolean",
+          "example": true
+        },
+        "spacephone": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "Stream": {
+      "type": "object",
+      "properties": {
+        "m4": {
+          "type": "string",
+          "example": "https://example.com/foo.m4"
+        },
+        "mjpeg": {
+          "type": "string",
+          "example": "https://example.com/foo.mjpeg"
+        },
+        "ustream": {
+          "type": "string",
+          "example": "https://example.com/foo.ustream"
+        }
+      }
+    },
     "State": {
       "type": "object",
       "required": [
@@ -1037,6 +1307,27 @@
         "message": {
           "type": "string",
           "example": "first!!!"
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Rosetta"
+        },
+        "type": {
+          "type": "string",
+          "example": "mission-started"
+        },
+        "timestamp": {
+          "type": "number",
+          "example": 1078211871
+        },
+        "extra": {
+          "type": "string",
+          "example": "Gonna harpoon that fucker!"
         }
       }
     },
@@ -1456,7 +1747,7 @@
         "temperature": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Machine"
+            "$ref": "#/definitions/Temperature"
           }
         },
         "door_locked": {
@@ -1556,7 +1847,8 @@
     "Cache": {
       "properties": {
         "schedule": {
-          "type": "string"
+          "type": "string",
+          "example": "m.02"
         }
       }
     },
@@ -1582,6 +1874,10 @@
     "SpaceApi": {
       "type": "object",
       "properties": {
+        "version": {
+          "type": "string",
+          "example": "0.13"
+        },
         "space": {
           "type": "string",
           "example": "Chaosdorf"
@@ -1597,11 +1893,35 @@
         "location": {
           "$ref": "#/definitions/Location"
         },
+        "spacefed": {
+          "$ref": "#/definitions/SpaceFed"
+        },
+        "cam": {
+          "type": "array",
+          "example": [
+            "https://example.com/myfancycam.mp4"
+          ]
+        },
+        "stream": {
+          "$ref": "#/definitions/Stream"
+        },
         "state": {
           "$ref": "#/definitions/State"
         },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        },
         "contact": {
           "$ref": "#/definitions/Contact"
+        },
+        "issue_report_channels": {
+          "type": "array",
+          "example": [
+            "ml"
+          ]
         },
         "sensors": {
           "$ref": "#/definitions/Sensors"
@@ -1617,12 +1937,6 @@
         },
         "projects": {
           "type": "array"
-        },
-        "issue_report_channels": {
-          "type": "array",
-          "example": [
-            "ml"
-          ]
         }
       }
     }
