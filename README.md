@@ -25,7 +25,7 @@ Todo:
 * ~~add docker / docker-compose file~~
 * ~~add an deployment example and running example~~
 * add a better first run experience
-* add routes for most used values
+* ~~add routes for most used values~~
 * force user to add a config file / signing key
 * ~~add post / delete route for access tokens~~
 * find a place to live for the swagger.json
