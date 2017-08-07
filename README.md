@@ -44,3 +44,4 @@ Todo:
 * ~~add post / delete route for access tokens~~
 * find a place to live for the swagger.json
 * add config file documentation
+* add ssl documentation
