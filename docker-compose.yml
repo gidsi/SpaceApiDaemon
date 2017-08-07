@@ -5,11 +5,13 @@ services:
     volumes:
       - /opt/spaceapidaemon/db:/data/db
   daemon:
-    build: spaceApiDaemon
+    image: spaceapi/daemon
     depends_on:
       - database
     expose:
       - 8080
+    volumes:
+      - /opt/spaceapidaemon/config:/etc/spaceapidaemon
   swagger:
     image: swaggerapi/swagger-ui
     depends_on:
@@ -19,7 +21,7 @@ services:
     environment:
       - API_URL=http://localhost/swagger.json
   reverse_proxy:
-    build: reverseProxy
+    image: spaceapi/daemonproxy
     depends_on:
       - daemon
       - swagger

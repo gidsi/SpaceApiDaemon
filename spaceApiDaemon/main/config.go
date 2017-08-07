@@ -22,7 +22,7 @@ type ConfigFile struct {
 }
 
 func initConfig() {
-	data, err := ioutil.ReadFile("config.yaml")
+	data, err := ioutil.ReadFile("/etc/spaceapidaemon/config.yaml")
 	yaml.Unmarshal(data, &config)
 
 	if err != nil {
