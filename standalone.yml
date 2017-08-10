@@ -19,11 +19,13 @@ services:
     expose:
       - 8080
     environment:
-      - API_URL=http://localhost/swagger.json
-  reverse_proxy:
-    image: spaceapi/daemonproxy
+      - API_URL=${SWAGGERURL}
+  caddy:
+    build: caddy
     depends_on:
       - daemon
       - swagger
     ports:
-      - 80:80
+      - 443:443
+    environment:
+      - SPACEAPIURL

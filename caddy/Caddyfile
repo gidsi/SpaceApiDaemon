@@ -1,0 +1,13 @@
+{$SPACEAPIURL}
+
+proxy /edit swagger:8080 {
+    without /edit
+}
+
+proxy /api daemon:8080/ {
+    without /api
+}
+
+gzip
+log stdout
+errors stdout
