@@ -22,7 +22,7 @@ How to start
 ```bash
 # cp config_example.yaml /opt/spaceapidaemon/config/
 ```
-6a. (reverse proxy / local) If you're already running a webserver, start it with:
+6a. (reverse proxy / testing) If you're already running a webserver, start it with:
 ```bash
 # docker-compose up -d
 ```
