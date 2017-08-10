@@ -26,7 +26,6 @@ services:
       - daemon
       - swagger
     ports:
-      - 443:443
+      - 2015:2015
     environment:
-      - SPACEAPIURL
-      - ${DATA_FOLDER}/certificates:/root/.caddy
+      - SPACEAPIURL=${SPACEAPIURL}:2015
