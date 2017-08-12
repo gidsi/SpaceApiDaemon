@@ -6,7 +6,7 @@ import (
 )
 
 func Index(w http.ResponseWriter, _ *http.Request) {
-	spaceData, err := readSpaceData()
+	spaceData, err := readLastSpaceData()
 
 	if err == nil {
 		ReturnJson(w, spaceData)

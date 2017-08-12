@@ -73,7 +73,7 @@ func changeIssueMail(w http.ResponseWriter, r *http.Request) {
 }
 
 func addKeymaster(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 	if spaceData.Contact == nil {
 		spaceData.Contact = &spaceapi_spec.Contact{}
 	}
@@ -87,7 +87,7 @@ func addKeymaster(w http.ResponseWriter, r *http.Request) {
 }
 
 func removeKeymaster(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 	if spaceData.Contact == nil {
 		spaceData.Contact = &spaceapi_spec.Contact{}
 	}
@@ -109,7 +109,7 @@ func removeKeymaster(w http.ResponseWriter, r *http.Request) {
 }
 
 func contactHelper(w http.ResponseWriter, r *http.Request) (string, spaceapi_spec.Root) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := SingleValue{}
 	createEntry(&requestSpaceData, w, r)

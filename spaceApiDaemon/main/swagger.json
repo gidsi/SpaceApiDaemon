@@ -1077,6 +1077,29 @@
         }
       }
     },
+    "/history/state": {
+      "get": {
+        "tags": [
+          "history"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/State"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/token": {
       "get": {
         "security": [

@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+	"io/ioutil"
+	"log"
 )
 
 type Route struct {
@@ -240,6 +242,13 @@ var IndexRoutes = Routes{
 		removeHumidity,
 	},
 	Route{
+		"",
+		"GET",
+		"/history/state",
+		false,
+		getHistoryState,
+	},
+	Route{
 		"list token",
 		"GET",
 		"/token",
@@ -259,5 +268,18 @@ var IndexRoutes = Routes{
 		"/token",
 		true,
 		deleteToken,
+	},
+	Route{
+		"Swagger.json route",
+		"GET",
+		"/swagger.json",
+		false,
+		func (w http.ResponseWriter, r *http.Request) {
+			b, err := ioutil.ReadFile("swagger.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			w.Write(b)
+		},
 	},
 }

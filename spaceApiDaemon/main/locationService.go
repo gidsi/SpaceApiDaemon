@@ -6,7 +6,7 @@ import (
 )
 
 func changeLocation(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.Location{}
 	createEntry(&requestSpaceData, w, r)

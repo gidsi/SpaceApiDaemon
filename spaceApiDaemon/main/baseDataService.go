@@ -10,7 +10,7 @@ type base struct {
 
 func changeBaseData(w http.ResponseWriter, r *http.Request) {
 	inputData := base{}
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	createEntry(&inputData, w, r)
 

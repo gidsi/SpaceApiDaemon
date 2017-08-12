@@ -38,7 +38,7 @@ func changeFlickrFeed(w http.ResponseWriter, r *http.Request) {
 }
 
 func feedsHelper(w http.ResponseWriter, r *http.Request) (spaceapi_spec.Root, spaceapi_spec.Feed) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.Feed{}
 	createEntry(&requestSpaceData, w, r)

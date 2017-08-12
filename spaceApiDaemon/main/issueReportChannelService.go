@@ -6,7 +6,7 @@ import (
 )
 
 func addIssueReportChannel(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	inputData := SingleValue{}
 	createEntry(&inputData, w, r)
@@ -17,7 +17,7 @@ func addIssueReportChannel(w http.ResponseWriter, r *http.Request) {
 }
 
 func removeIssueReportChannel(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	vars := mux.Vars(r)
 	for i := 0; i < len(spaceData.IssueReportChannels); i++ {

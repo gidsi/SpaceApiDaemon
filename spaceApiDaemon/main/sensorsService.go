@@ -7,7 +7,7 @@ import (
 )
 
 func addDoorLocked(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.DoorLocked{}
 	createEntry(&requestSpaceData, w, r)
@@ -22,7 +22,7 @@ func addDoorLocked(w http.ResponseWriter, r *http.Request) {
 }
 
 func changeDoorLocked(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.DoorLocked{}
 	createEntry(&requestSpaceData, w, r)
@@ -44,7 +44,7 @@ func changeDoorLocked(w http.ResponseWriter, r *http.Request) {
 
 
 func removeDoorLocked(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.DoorLocked{}
 	createEntry(&requestSpaceData, w, r)
@@ -69,7 +69,7 @@ func removeDoorLocked(w http.ResponseWriter, r *http.Request) {
 }
 
 func addTemperature(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.Temperature{}
 	createEntry(&requestSpaceData, w, r)
@@ -85,7 +85,7 @@ func addTemperature(w http.ResponseWriter, r *http.Request) {
 
 
 func changeTemperature(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.Temperature{}
 	createEntry(&requestSpaceData, w, r)
@@ -107,7 +107,7 @@ func changeTemperature(w http.ResponseWriter, r *http.Request) {
 
 
 func removeTemperature(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.Temperature{}
 	createEntry(&requestSpaceData, w, r)
@@ -132,7 +132,7 @@ func removeTemperature(w http.ResponseWriter, r *http.Request) {
 }
 
 func addHumidity(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.Humidity{}
 	createEntry(&requestSpaceData, w, r)
@@ -147,7 +147,7 @@ func addHumidity(w http.ResponseWriter, r *http.Request) {
 }
 
 func changeHumidity(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.Humidity{}
 	createEntry(&requestSpaceData, w, r)
@@ -168,7 +168,7 @@ func changeHumidity(w http.ResponseWriter, r *http.Request) {
 }
 
 func removeHumidity(w http.ResponseWriter, r *http.Request) {
-	spaceData, _ := readSpaceData()
+	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := spaceapi_spec.Humidity{}
 	createEntry(&requestSpaceData, w, r)

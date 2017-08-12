@@ -34,7 +34,7 @@ func writeSpaceData(data spaceapi_spec.Root) {
 	}
 }
 
-func readSpaceData() (spaceapi_spec.Root, error) {
+func readLastSpaceData() (spaceapi_spec.Root, error) {
 	session, err := mgo.Dial(config.MongoDbServer)
 	if err != nil {
 		panic(err)
@@ -51,6 +51,25 @@ func readSpaceData() (spaceapi_spec.Root, error) {
 	}
 
 	return result.Data, err
+}
+
+func readSpaceData() ([]spaceApiWithTimestamp, error) {
+	session, err := mgo.Dial(config.MongoDbServer)
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
+
+	session.SetMode(mgo.Monotonic, true)
+
+	c := session.DB(config.MongoDbDatabase).C("spaceData")
+	result := []spaceApiWithTimestamp{}
+	err = c.Find(bson.M{}).Sort("-timestamp").All(&result)
+	if err != nil {
+		log.Print("cant find spaceapi data in collection")
+	}
+
+	return result, err
 }
 
 func checkToken(token string) bool {

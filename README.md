@@ -52,6 +52,8 @@ Todo:
 * ~~add routes for most used values~~
 * ~~force user to add a config file / signing key~~
 * ~~add post / delete route for access tokens~~
-* find a place to live for the swagger.json
+* ~~find a place to live for the swagger.json~~
 * add config file documentation
 * ~~add ssl documentation~~
+* add example curl
+* create history import
