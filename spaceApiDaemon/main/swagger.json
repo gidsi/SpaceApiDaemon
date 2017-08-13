@@ -1210,6 +1210,9 @@
     },
     "Feed": {
       "type": "object",
+      "required": [
+        "url"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -1217,8 +1220,7 @@
         },
         "url": {
           "type": "string",
-          "example": "https://example.com/feed.rss",
-          "required": true
+          "example": "https://example.com/feed.rss"
         }
       }
     },
