@@ -1,5 +1,5 @@
-SpaceApiDaemon
-==============
+SpaceApiDaemon deployment
+=========================
 
 **Work in progress, do not use in production!**
 
@@ -18,7 +18,7 @@ How to start
 # mkdir -p /opt/spaceapidaemon/{db,config,certificates}
 ```
 4. Clone the repo and switch into the project folder.
-5. Create the config file
+5. Create the [config file](https://github.com/gidsi/SpaceApiDaemon/tree/master/spaceApiDaemon#config)
 ```bash
 # cp config_example.yaml /opt/spaceapidaemon/config/
 ```
@@ -53,7 +53,7 @@ Todo:
 * ~~force user to add a config file / signing key~~
 * ~~add post / delete route for access tokens~~
 * ~~find a place to live for the swagger.json~~
-* add config file documentation
+* ~~add config file documentation~~
 * ~~add ssl documentation~~
-* add example curl
+* ~~add example curl~~
 * create history import
