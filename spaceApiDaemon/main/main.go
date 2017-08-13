@@ -14,7 +14,7 @@ func main() {
 
 	router := SetupRouter(IndexRoutes)
 	http.Handle("/", router)
-	log.Fatal(http.ListenAndServe(":" + strconv.Itoa(config.Port), router))
+	log.Fatal(http.ListenAndServe(":" + strconv.Itoa(config.ApiPort), router))
 }
 
 type SingleValue struct {
