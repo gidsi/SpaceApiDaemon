@@ -38,9 +38,9 @@ Caddy will take care of getting and update SSL certificates from Lets Encrypt.
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MDE3OTQzNzN9.qOW5dnW-HtXm9GotAOk9EJ2lDj-qTkdt3kL9EAbc3IE
 ```
-8. Open a browser and open http://yourdomain/edit, and log-in (Button Authorize). You should at least provide data to basedata, location, state, contact and issue_report_channels. 
+8. Open a browser and open https://yourdomain/edit/, and log-in (Button Authorize). You should at least provide data to basedata, location, state, contact and issue_report_channels. 
 
-9. Your SpaceApi is now running at http://yourdomain/api/
+9. Your SpaceApi is now running at https://yourdomain/api/
 
 10. Profit!
 
