@@ -43,17 +43,3 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MDE3OTQzNzN9.qOW5dnW-HtXm9GotAO
 9. Your SpaceApi is now running at https://yourdomain/api/
 
 10. Profit!
-
-Todo:
------
-* ~~add docker / docker-compose file~~
-* ~~add an deployment example and running example~~
-* ~~add a better first run experience~~
-* ~~add routes for most used values~~
-* ~~force user to add a config file / signing key~~
-* ~~add post / delete route for access tokens~~
-* ~~find a place to live for the swagger.json~~
-* ~~add config file documentation~~
-* ~~add ssl documentation~~
-* ~~add example curl~~
-* ~~create history import~~
