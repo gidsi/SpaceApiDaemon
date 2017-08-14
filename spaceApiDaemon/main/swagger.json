@@ -1100,6 +1100,23 @@
         }
       }
     },
+    "/importN39": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "history"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/token": {
       "get": {
         "security": [

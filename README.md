@@ -56,4 +56,4 @@ Todo:
 * ~~add config file documentation~~
 * ~~add ssl documentation~~
 * ~~add example curl~~
-* create history import
+* ~~create history import~~

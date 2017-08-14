@@ -13,17 +13,33 @@ type spaceApiWithTimestamp struct {
 	Timestamp int64
 }
 
-func writeSpaceData(data spaceapi_spec.Root) {
-	session, err := mgo.Dial(config.MongoConnectionString)
-	if err != nil {
-		panic(err)
-	}
-	defer session.Close()
+var session *mgo.Session
 
-	session.SetMode(mgo.Monotonic, true)
+func getSession() *mgo.Session {
+	if session == nil {
+		var err error
+		session, err = mgo.Dial(config.MongoConnectionString)
+		session.SetMode(mgo.Primary, true)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	return session.Clone()
+}
+
+func withCollection(collection string, s func(*mgo.Collection) error) error {
+	session := getSession()
+	defer session.Close()
+	c := session.DB(config.MongoCollection).C(collection)
+	return s(c)
+}
+
+func writeSpaceData(data spaceapi_spec.Root) {
+	session := getSession()
 
 	c := session.DB(config.MongoCollection).C("spaceData")
-	err = c.Insert(
+	err := c.Insert(
 		spaceApiWithTimestamp{
 			data,
 			time.Now().Unix(),
@@ -35,17 +51,13 @@ func writeSpaceData(data spaceapi_spec.Root) {
 }
 
 func readLastSpaceData() (spaceapi_spec.Root, error) {
-	session, err := mgo.Dial(config.MongoConnectionString)
-	if err != nil {
-		panic(err)
-	}
-	defer session.Close()
-
-	session.SetMode(mgo.Monotonic, true)
-
-	c := session.DB(config.MongoCollection).C("spaceData")
 	result := spaceApiWithTimestamp{}
-	err = c.Find(bson.M{}).Sort("-timestamp").One(&result)
+	query := func(c *mgo.Collection) error {
+		fn := c.Find(bson.M{}).Sort("-timestamp").One(&result)
+		return fn
+	}
+
+	err := withCollection("spaceData", query)
 	if err != nil {
 		log.Print("cant find spaceapi data in collection")
 	}
@@ -54,17 +66,13 @@ func readLastSpaceData() (spaceapi_spec.Root, error) {
 }
 
 func readSpaceData() ([]spaceApiWithTimestamp, error) {
-	session, err := mgo.Dial(config.MongoConnectionString)
-	if err != nil {
-		panic(err)
-	}
-	defer session.Close()
-
-	session.SetMode(mgo.Monotonic, true)
-
-	c := session.DB(config.MongoCollection).C("spaceData")
 	result := []spaceApiWithTimestamp{}
-	err = c.Find(bson.M{}).Sort("-timestamp").All(&result)
+	query := func(c *mgo.Collection) error {
+		fn := c.Find(bson.M{}).Sort("-timestamp").All(&result)
+		return fn
+	}
+
+	err := withCollection("spaceData", query)
 	if err != nil {
 		log.Print("cant find spaceapi data in collection")
 	}
@@ -77,17 +85,12 @@ func checkToken(token string) bool {
 		return false
 	}
 
-	session, err := mgo.Dial(config.MongoConnectionString)
-	if err != nil {
-		panic(err)
-	}
-	defer session.Close()
-
-	session.SetMode(mgo.Monotonic, true)
-
-	c := session.DB(config.MongoCollection).C("token")
 	result := Token{}
-	err = c.Find(bson.M{ "token": token }).One(&result)
+	query := func(c *mgo.Collection) error {
+		fn := c.Find(bson.M{ "token": token }).One(&result)
+		return fn
+	}
+	err := withCollection("token", query)
 	if err != nil {
 		return false
 	}
@@ -96,17 +99,12 @@ func checkToken(token string) bool {
 }
 
 func readToken() []Token {
-	session, err := mgo.Dial(config.MongoConnectionString)
-	if err != nil {
-		panic(err)
-	}
-	defer session.Close()
-
-	session.SetMode(mgo.Monotonic, true)
-
-	c := session.DB(config.MongoCollection).C("token")
 	result := []Token{}
-	err = c.Find(bson.M{}).All(&result)
+	query := func(c *mgo.Collection) error {
+		fn := c.Find(bson.M{}).All(&result)
+		return fn
+	}
+	err := withCollection("token", query)
 	if err != nil {
 		panic(err)
 	}
@@ -116,33 +114,44 @@ func readToken() []Token {
 
 
 func writeToken(token string) {
-	session, err := mgo.Dial(config.MongoConnectionString)
+	query := func(c *mgo.Collection) error {
+		fn := c.Insert(Token{ token })
+		return fn
+	}
+	err := withCollection("token", query)
 	if err != nil {
 		panic(err)
-	}
-	defer session.Close()
-
-	session.SetMode(mgo.Monotonic, true)
-
-	c := session.DB(config.MongoCollection).C("token")
-	err = c.Insert(Token{ token })
-	if err != nil {
-		log.Fatal(err)
 	}
 }
 
 func removeToken(token string) {
-	session, err := mgo.Dial(config.MongoConnectionString)
+	query := func(c *mgo.Collection) error {
+		fn := c.Remove(Token{ token })
+		return fn
+	}
+	err := withCollection("token", query)
 	if err != nil {
 		panic(err)
 	}
-	defer session.Close()
+}
 
-	session.SetMode(mgo.Monotonic, true)
+func writeImportedData(data N39Item) {
+	bar := spaceapi_spec.Root{}
+	bar.State = &spaceapi_spec.State{
+		Lastchange: int(data.Value.Lastchange),
+		Open: data.Value.Open,
+	}
 
-	c := session.DB(config.MongoCollection).C("token")
-	err = c.Remove(Token{ token })
+	query := func(c *mgo.Collection) error {
+		return c.Insert(
+			spaceApiWithTimestamp{
+				bar,
+				data.Value.Lastchange,
+			},
+		)
+	}
+	err := withCollection("spaceData", query)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }

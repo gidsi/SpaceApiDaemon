@@ -282,4 +282,11 @@ var IndexRoutes = Routes{
 			w.Write(b)
 		},
 	},
+	Route{
+		"Import History",
+		"GET",
+		"/importN39",
+		true,
+		importFromN39,
+	},
 }
