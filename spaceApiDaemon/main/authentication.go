@@ -6,6 +6,30 @@ import (
 	"net/http"
 )
 
+var authenticationRoutes = routes{
+	route{
+		"list token",
+		"GET",
+		"/token",
+		true,
+		getToken,
+	},
+	route{
+		"Generate new token",
+		"POST",
+		"/token",
+		true,
+		addToken,
+	},
+	route{
+		"Remove token",
+		"DELETE",
+		"/token",
+		true,
+		deleteToken,
+	},
+}
+
 type Token struct {
 	Token string `json:"token"`
 }
@@ -15,13 +39,13 @@ func addToken(w http.ResponseWriter, _ *http.Request) {
 
 	writeToken(token.Token)
 
-	ReturnJson(w, token)
+	returnJSON(w, token)
 }
 
 func getToken(w http.ResponseWriter, _ *http.Request){
 	tokenArray := readToken()
 
-	ReturnJson(w, tokenArray)
+	returnJSON(w, tokenArray)
 }
 
 func deleteToken(w http.ResponseWriter, r *http.Request) {
@@ -42,7 +66,6 @@ func createToken() string {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	ss, _ := token.SignedString(signingKey)
-	// encodedToken := base64.StdEncoding.EncodeToString([]byte(ss))
 
 	return ss
 }

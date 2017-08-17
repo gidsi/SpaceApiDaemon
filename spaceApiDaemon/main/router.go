@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func SetupRouter(routes Routes) *mux.Router {
+func setupRouter(routes routes) *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
 	methods := make(map[string][]string)
@@ -30,7 +30,7 @@ func SetupRouter(routes Routes) *mux.Router {
 	return router
 }
 
-func setupRouteForRouter(router *mux.Router, route Route) {
+func setupRouteForRouter(router *mux.Router, route route) {
 	router.
 	Methods(route.Method).
 	Path(route.Pattern).
@@ -39,7 +39,7 @@ func setupRouteForRouter(router *mux.Router, route Route) {
 }
 
 // TODO: clean that mess
-func setupRoute(route Route) http.Handler {
+func setupRoute(route route) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 

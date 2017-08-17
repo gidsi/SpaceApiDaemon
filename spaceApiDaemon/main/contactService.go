@@ -6,6 +6,100 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var contactRoutes = routes{
+	route{
+		"Phone",
+		"PUT",
+		"/contact/phone",
+		true,
+		changePhone,
+	},
+	route{
+		"Sip",
+		"PUT",
+		"/contact/sip",
+		true,
+		changeSip,
+	},
+	route{
+		"Irc",
+		"PUT",
+		"/contact/irc",
+		true,
+		changeIrc,
+	},
+	route{
+		"Twitter",
+		"PUT",
+		"/contact/twitter",
+		true,
+		changeTwitter,
+	},
+	route{
+		"Facebook",
+		"PUT",
+		"/contact/facebook",
+		true,
+		changeFacebook,
+	},
+	route{
+		"Identica",
+		"PUT",
+		"/contact/identica",
+		true,
+		changeIdentica,
+	},
+	route{
+		"Foursquare",
+		"PUT",
+		"/contact/foursquare",
+		true,
+		changeFoursquare,
+	},
+	route{
+		"Email",
+		"PUT",
+		"/contact/email",
+		true,
+		changeEmail,
+	},
+	route{
+		"Ml",
+		"PUT",
+		"/contact/ml",
+		true,
+		changeMl,
+	},
+	route{
+		"Jabber",
+		"PUT",
+		"/contact/jabber",
+		true,
+		changeJabber,
+	},
+	route{
+		"IssueMail",
+		"PUT",
+		"/contact/issuemail",
+		true,
+		changeIssueMail,
+	},
+	route{
+		"Add Keymaster",
+		"POST",
+		"/contact/keymasters",
+		true,
+		addKeymaster,
+	},
+	route{
+		"Remove Keymaster",
+		"DELETE",
+		"/contact/keymasters/{name}",
+		true,
+		removeKeymaster,
+	},
+}
+
 func changePhone(w http.ResponseWriter, r *http.Request) {
 	value, spaceData := contactHelper(w, r)
 	spaceData.Contact.Phone = value
@@ -111,7 +205,7 @@ func removeKeymaster(w http.ResponseWriter, r *http.Request) {
 func contactHelper(w http.ResponseWriter, r *http.Request) (string, spaceapi_spec.Root) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := SingleValue{}
+	requestSpaceData := singleValue{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.Contact == nil {

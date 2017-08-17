@@ -6,6 +6,72 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var sensorsRoutes = routes{
+	route{
+		"Add temperature sensor",
+		"POST",
+		"/sensors/temperature",
+		true,
+		addTemperature,
+	},
+	route{
+		"change temperature sensor",
+		"PUT",
+		"/sensors/temperature/{location}",
+		true,
+		changeTemperature,
+	},
+	route{
+		"Remove temperature sensor",
+		"DELETE",
+		"/sensors/temperature/{location}",
+		true,
+		removeTemperature,
+	},
+	route{
+		"Add door locked sensor",
+		"POST",
+		"/sensors/door_locked",
+		true,
+		addDoorLocked,
+	},
+	route{
+		"change door locked sensor",
+		"PUT",
+		"/sensors/door_locked/{location}",
+		true,
+		changeDoorLocked,
+	},
+	route{
+		"Remove Door locked sensor",
+		"DELETE",
+		"/sensors/door_locked/{location}",
+		true,
+		removeDoorLocked,
+	},
+	route{
+		"Add humidity sensor",
+		"POST",
+		"/sensors/humidity",
+		true,
+		addHumidity,
+	},
+	route{
+		"change humidity sensor",
+		"PUT",
+		"/sensors/humidity/{location}",
+		true,
+		changeHumidity,
+	},
+	route{
+		"Remove humidity sensor",
+		"DELETE",
+		"/sensors/humidity/{location}",
+		true,
+		removeHumidity,
+	},
+}
+
 func addDoorLocked(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 

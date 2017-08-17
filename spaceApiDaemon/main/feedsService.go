@@ -5,6 +5,37 @@ import (
 	"github.com/gidsi/SpaceApiSpec/v013"
 )
 
+var feedRoutes = routes{
+	route{
+		"Blog Feed",
+		"PUT",
+		"/feeds/blog",
+		true,
+		changeBlogFeed,
+	},
+	route{
+		"Wiki Feed",
+		"PUT",
+		"/feeds/wiki",
+		true,
+		changeWikiFeed,
+	},
+	route{
+		"Calendar Feed",
+		"PUT",
+		"/feeds/calendar",
+		true,
+		changeCalendarFeed,
+	},
+	route{
+		"Flickr Feed",
+		"PUT",
+		"/feeds/flickr",
+		true,
+		changeFlickrFeed,
+	},
+}
+
 func changeBlogFeed(w http.ResponseWriter, r *http.Request) {
 	spaceData, feedData := feedsHelper(w, r)
 

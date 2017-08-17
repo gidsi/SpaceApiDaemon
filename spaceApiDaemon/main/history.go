@@ -7,7 +7,24 @@ import (
 	"strings"
 )
 
-type ItemsSpaceApiWithTimestamp struct {
+var historyRoutes = routes{
+	route{
+		"",
+		"GET",
+		"/history/state",
+		false,
+		getHistoryState,
+	},
+	route{
+		"Import History",
+		"GET",
+		"/importN39",
+		true,
+		importFromN39,
+	},
+}
+
+type itemsSpaceAPIWithTimestamp struct {
 	Items []spaceapi_spec.State `json:"items"`
 }
 
@@ -28,30 +45,30 @@ func getHistoryState(w http.ResponseWriter, _ *http.Request) {
 			stateSlice = append(stateSlice, filteredStates[i])
 		}
 
-		ReturnJson(w, ItemsSpaceApiWithTimestamp{stateSlice})
+		returnJSON(w, itemsSpaceAPIWithTimestamp{stateSlice})
 	}
 }
 
-type N39State struct {
+type n39State struct {
 	Open bool `json:"open"`
 	Lastchange int64 `json:"lastchange"`
 }
 
-type N39Item struct {
-	Id    string `json:"id"`
+type n39Item struct {
+	ID    string `json:"id"`
 	Key   int64 `json:"key"`
-	Value N39State `json:"value"`
+	Value n39State `json:"value"`
 }
 
-type N39Items struct {
+type n39Items struct {
 	TotalRows	int `json:"total_rows"`
 	Offset		int `json:"offset"`
-	Rows		[]N39Item `json:"rows"`
+	Rows		[]n39Item `json:"rows"`
 }
 
-func importFromN39(w http.ResponseWriter, _ *http.Request) {
+func importFromN39(_ http.ResponseWriter, _ *http.Request) {
 	spaceData, _ := readLastSpaceData()
-	foo := N39Items{}
+	foo := n39Items{}
 
 	r, err := http.Get("http://spaceapi-stats.n39.eu/" + strings.ToLower(spaceData.Space) + "/_design/space/_view/all")
 	if err != nil {

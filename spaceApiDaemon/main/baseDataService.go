@@ -2,10 +2,21 @@ package main
 
 import "net/http"
 
+var baseDataRoutes = routes{
+	route{
+		"Base Data",
+		"PUT",
+		"/base",
+		true,
+		changeBaseData,
+	},
+}
+
+
 type base struct {
 	Space string `json:"space"`
-	Logo string `json:"logo"`
-	Url string `json:"url"`
+	Logo  string `json:"logo"`
+	URL   string `json:"url"`
 }
 
 func changeBaseData(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +28,7 @@ func changeBaseData(w http.ResponseWriter, r *http.Request) {
 	spaceData.Api = "0.13"
 	spaceData.Space = inputData.Space
 	spaceData.Logo = inputData.Logo
-	spaceData.Url = inputData.Url
+	spaceData.Url = inputData.URL
 
 	writeSpaceData(spaceData)
 }

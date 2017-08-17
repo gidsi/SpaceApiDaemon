@@ -5,6 +5,16 @@ import (
 	"github.com/gidsi/SpaceApiSpec/v013"
 )
 
+var locationRoutes = routes{
+	route{
+		"Location",
+		"PUT",
+		"/location",
+		true,
+		changeLocation,
+	},
+}
+
 func changeLocation(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 

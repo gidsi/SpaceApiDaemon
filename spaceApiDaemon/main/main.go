@@ -12,12 +12,31 @@ func main() {
 
 	log.Print(readToken())
 
-	router := SetupRouter(IndexRoutes)
+	routes := []routes{
+		staticRoutes,
+		indexRoutes,
+		issueReportChannelRoutes,
+		locationRoutes,
+		authenticationRoutes,
+		historyRoutes,
+		baseDataRoutes,
+		contactRoutes,
+		feedRoutes,
+		sensorsRoutes,
+		stateRoutes,
+	}
+
+	var ApplicationRoutes []route
+	for _, r := range routes {
+		ApplicationRoutes = append(ApplicationRoutes, r...)
+	}
+
+	router := setupRouter(ApplicationRoutes)
 	http.Handle("/", router)
-	log.Fatal(http.ListenAndServe(":" + strconv.Itoa(config.ApiPort), router))
+	log.Fatal(http.ListenAndServe(":" + strconv.Itoa(config.APIPort), router))
 }
 
-type SingleValue struct {
+type singleValue struct {
 	Value	string `json:"value"`
 }
 

@@ -5,7 +5,17 @@ import (
 	"github.com/gidsi/SpaceApiSpec/v013"
 )
 
-type StateShort struct {
+var stateRoutes = routes{
+	route{
+		"State",
+		"PUT",
+		"/state",
+		true,
+		changeState,
+	},
+}
+
+type stateShort struct {
 	Open          bool `json:"open"`
 	Lastchange    int `json:"lastchange,omitempty"`
 	TriggerPerson string `json:"trigger_person,omitempty"`
@@ -15,7 +25,7 @@ type StateShort struct {
 func changeState(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := StateShort{}
+	requestSpaceData := stateShort{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.State == nil {

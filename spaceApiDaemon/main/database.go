@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type spaceApiWithTimestamp struct {
+type spaceAPIWithTimestamp struct {
 	Data spaceapi_spec.Root
 	Timestamp int64
 }
@@ -40,7 +40,7 @@ func writeSpaceData(data spaceapi_spec.Root) {
 
 	c := session.DB(config.MongoCollection).C("spaceData")
 	err := c.Insert(
-		spaceApiWithTimestamp{
+		spaceAPIWithTimestamp{
 			data,
 			time.Now().Unix(),
 		},
@@ -51,10 +51,9 @@ func writeSpaceData(data spaceapi_spec.Root) {
 }
 
 func readLastSpaceData() (spaceapi_spec.Root, error) {
-	result := spaceApiWithTimestamp{}
+	result := spaceAPIWithTimestamp{}
 	query := func(c *mgo.Collection) error {
-		fn := c.Find(bson.M{}).Sort("-timestamp").One(&result)
-		return fn
+		return c.Find(bson.M{}).Sort("-timestamp").One(&result)
 	}
 
 	err := withCollection("spaceData", query)
@@ -65,11 +64,10 @@ func readLastSpaceData() (spaceapi_spec.Root, error) {
 	return result.Data, err
 }
 
-func readSpaceData() ([]spaceApiWithTimestamp, error) {
-	result := []spaceApiWithTimestamp{}
+func readSpaceData() ([]spaceAPIWithTimestamp, error) {
+	result := []spaceAPIWithTimestamp{}
 	query := func(c *mgo.Collection) error {
-		fn := c.Find(bson.M{}).Sort("-timestamp").All(&result)
-		return fn
+		return c.Find(bson.M{}).Sort("-timestamp").All(&result)
 	}
 
 	err := withCollection("spaceData", query)
@@ -87,8 +85,7 @@ func checkToken(token string) bool {
 
 	result := Token{}
 	query := func(c *mgo.Collection) error {
-		fn := c.Find(bson.M{ "token": token }).One(&result)
-		return fn
+		return c.Find(bson.M{ "token": token }).One(&result)
 	}
 	err := withCollection("token", query)
 	if err != nil {
@@ -101,8 +98,7 @@ func checkToken(token string) bool {
 func readToken() []Token {
 	result := []Token{}
 	query := func(c *mgo.Collection) error {
-		fn := c.Find(bson.M{}).All(&result)
-		return fn
+		return c.Find(bson.M{}).All(&result)
 	}
 	err := withCollection("token", query)
 	if err != nil {
@@ -115,8 +111,7 @@ func readToken() []Token {
 
 func writeToken(token string) {
 	query := func(c *mgo.Collection) error {
-		fn := c.Insert(Token{ token })
-		return fn
+		return c.Insert(Token{ token })
 	}
 	err := withCollection("token", query)
 	if err != nil {
@@ -126,8 +121,7 @@ func writeToken(token string) {
 
 func removeToken(token string) {
 	query := func(c *mgo.Collection) error {
-		fn := c.Remove(Token{ token })
-		return fn
+		return c.Remove(Token{ token })
 	}
 	err := withCollection("token", query)
 	if err != nil {
@@ -135,7 +129,7 @@ func removeToken(token string) {
 	}
 }
 
-func writeImportedData(data N39Item) {
+func writeImportedData(data n39Item) {
 	bar := spaceapi_spec.Root{}
 	bar.State = &spaceapi_spec.State{
 		Lastchange: int(data.Value.Lastchange),
@@ -144,7 +138,7 @@ func writeImportedData(data N39Item) {
 
 	query := func(c *mgo.Collection) error {
 		return c.Insert(
-			spaceApiWithTimestamp{
+			spaceAPIWithTimestamp{
 				bar,
 				data.Value.Lastchange,
 			},
