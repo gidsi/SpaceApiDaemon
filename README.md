@@ -20,7 +20,7 @@ How to start
 4. Clone the repo and switch into the project folder.
 5. Create the [config file](https://github.com/gidsi/SpaceApiDaemon/tree/master/spaceApiDaemon#config)
 ```bash
-# cp config_example.yaml /opt/spaceapidaemon/config/
+# cp config_example.yaml /opt/spaceapidaemon/config/config.yaml
 ```
 6a. (reverse proxy / testing) If you're already running a webserver, start it with:
 ```bash
