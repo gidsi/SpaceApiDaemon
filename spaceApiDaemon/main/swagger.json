@@ -120,7 +120,7 @@
         "tags": [
           "state"
         ],
-        "summary": "Change the location of your space",
+        "summary": "Change the state of your space, lastchange will be generated if omitted and the state has changed",
         "parameters": [
           {
             "in": "body",
@@ -1330,8 +1330,7 @@
     "State": {
       "type": "object",
       "required": [
-        "open",
-        "lastchange"
+        "open"
       ],
       "properties": {
         "open": {

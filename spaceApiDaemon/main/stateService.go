@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"github.com/gidsi/SpaceApiSpec/v013"
+	"time"
 )
 
 var stateRoutes = routes{
@@ -32,8 +33,13 @@ func changeState(w http.ResponseWriter, r *http.Request) {
 		spaceData.State = &spaceapi_spec.State{}
 	}
 
+	if spaceData.State.Open != requestSpaceData.Open && requestSpaceData.Lastchange == 0 {
+		spaceData.State.Lastchange = int(time.Now().Unix())
+	} else {
+		spaceData.State.Lastchange = requestSpaceData.Lastchange
+	}
+
 	spaceData.State.Open = requestSpaceData.Open
-	spaceData.State.Lastchange = requestSpaceData.Lastchange
 	spaceData.State.Message = requestSpaceData.Message
 	spaceData.State.TriggerPerson = requestSpaceData.TriggerPerson
 
