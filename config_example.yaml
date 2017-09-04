@@ -1,3 +1,4 @@
 signingKey: "AllYourBase"
+mongoConnectionString: "database"
 allowedOrigins:
   - "https://yourdomain.com"
