@@ -89,15 +89,16 @@ func addDoorLocked(w http.ResponseWriter, r *http.Request) {
 
 func changeDoorLocked(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
+	vars := mux.Vars(r)
 
 	requestSpaceData := spaceapi_spec.DoorLocked{}
 	createEntry(&requestSpaceData, w, r)
+	requestSpaceData.Location = vars["location"]
 
 	if spaceData.Sensors == nil {
 		spaceData.Sensors = &spaceapi_spec.Sensors{}
 	}
 
-	vars := mux.Vars(r)
 	for i := 0; i < len(spaceData.Sensors.DoorLocked); i++ {
 		if spaceData.Sensors.DoorLocked[i].Location == vars["location"] {
 			spaceData.Sensors.DoorLocked[i] = requestSpaceData
@@ -152,15 +153,16 @@ func addTemperature(w http.ResponseWriter, r *http.Request) {
 
 func changeTemperature(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
+	vars := mux.Vars(r)
 
 	requestSpaceData := spaceapi_spec.Temperature{}
 	createEntry(&requestSpaceData, w, r)
+	requestSpaceData.Location = vars["location"]
 
 	if spaceData.Sensors == nil {
 		spaceData.Sensors = &spaceapi_spec.Sensors{}
 	}
 
-	vars := mux.Vars(r)
 	for i := 0; i < len(spaceData.Sensors.Temperature); i++ {
 		if spaceData.Sensors.Temperature[i].Location == vars["location"] {
 			spaceData.Sensors.Temperature[i] = requestSpaceData
@@ -214,15 +216,16 @@ func addHumidity(w http.ResponseWriter, r *http.Request) {
 
 func changeHumidity(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
+	vars := mux.Vars(r)
 
 	requestSpaceData := spaceapi_spec.Humidity{}
 	createEntry(&requestSpaceData, w, r)
+	requestSpaceData.Location = vars["location"]
 
 	if spaceData.Sensors == nil {
 		spaceData.Sensors = &spaceapi_spec.Sensors{}
 	}
 
-	vars := mux.Vars(r)
 	for i := 0; i < len(spaceData.Sensors.Humidity); i++ {
 		if spaceData.Sensors.Humidity[i].Location == vars["location"] {
 			spaceData.Sensors.Humidity[i] = requestSpaceData
