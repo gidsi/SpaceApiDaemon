@@ -7,7 +7,7 @@ export const fetched = createAction(STATUS_FETCHED, result => result);
 
 export const fetchStatus = () => (dispatch) => {
   request
-    .get(`http://localhost:2015/api/`)
+    .get(`https://newstatus.chaospott.de/api/`)
     .set('Content-Type', 'application/json')
     .end(
       (err, res) => {

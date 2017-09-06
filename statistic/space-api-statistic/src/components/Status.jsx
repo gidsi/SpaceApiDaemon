@@ -36,12 +36,12 @@ const Status = (props) => {
 
 Status.propTypes = {
   status: PropTypes.object,
-  currentTime: PropTypes.string,
+  currentTime: PropTypes.number,
 };
 
 Status.defaultProps = {
   status: null,
-  currentTime: '0',
+  currentTime: 0,
 };
 
 export default Status;

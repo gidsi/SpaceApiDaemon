@@ -30,7 +30,7 @@ const Filter = (props) => {
       <input
         className={props.classes.baz}
         value={props.filterValue}
-        onChange={(e) => { props.setFilter(e.nativeEvent.target.value)}}
+        onChange={(e) => { props.setFilter(parseInt(e.nativeEvent.target.value, 10))}}
         type="range"
         min={minMax.minimumAmount}
         max={minMax.maximumAmount}
@@ -44,13 +44,13 @@ const Filter = (props) => {
 };
 
 Filter.propTypes = {
-  filterValue: PropTypes.string,
+  filterValue: PropTypes.number,
   setFilter: PropTypes.func,
   history: PropTypes.array,
 };
 
 Filter.defaultProps = {
-  filterValue: '0',
+  filterValue: 0,
   setFilter: () => {},
   history: [],
 };

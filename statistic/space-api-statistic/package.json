@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
-    "gradient-color": "^2.0.0",
+    "color": "^2.0.0",
     "history": "^4.6.3",
     "lodash.flatten": "^4.4.0",
     "lodash.range": "^3.2.0",

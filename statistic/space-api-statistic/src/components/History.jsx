@@ -58,56 +58,57 @@ const History = (props) => {
   return (
     <div>
       <table>
-        <tr>
-          <td>
-            Longest time open
-          </td>
-          <td>
-            {longestTimeOpen.humanize()}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Longest time closed
-          </td>
-          <td>
-            {longestTimeClosed.humanize()}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Time open %
-          </td>
-          <td>
-            {Math.round(openingTime.timeOpenPercent)}%
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Time closed %
-          </td>
-          <td>
-            {Math.round(openingTime.timeClosedPercent)}%
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Median Time Open
-          </td>
-          <td>
-            {medianTimeOpenObj.humanize()}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Median Time Closed
-          </td>
-          <td>
-            {medianTimeClosedObj.humanize()}
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>
+              Longest time open
+            </td>
+            <td>
+              {longestTimeOpen.humanize()}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Longest time closed
+            </td>
+            <td>
+              {longestTimeClosed.humanize()}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Time open %
+            </td>
+            <td>
+              {Math.round(openingTime.timeOpenPercent)}%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Time closed %
+            </td>
+            <td>
+              {Math.round(openingTime.timeClosedPercent)}%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Median Time Open
+            </td>
+            <td>
+              {medianTimeOpenObj.humanize()}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Median Time Closed
+            </td>
+            <td>
+              {medianTimeClosedObj.humanize()}
+            </td>
+          </tr>
+        </tbody>
       </table>
-
     </div>
   );
 };

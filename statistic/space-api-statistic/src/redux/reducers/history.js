@@ -12,7 +12,7 @@ export const setTime = createAction(SET_TIME, result => result);
 
 export const fetchHistory = () => (dispatch) => {
   request
-    .get(`http://localhost:2015/api/history/state`)
+    .get(`https://newstatus.chaospott.de/api/history/state`)
     .set('Content-Type', 'application/json')
     .end(
       (err, res) => {
