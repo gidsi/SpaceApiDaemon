@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import injectSheet from 'react-jss';
+import HistoryPropTypes from '../propTypes/history';
 
-const getMinMaxForHistory = (history) => ({
+const getMinMaxForHistory = history => ({
   minimumAmount: history[0] ? history[0].from : 0,
-  maximumAmount: history[history.length-2] ? history[history.length-2].from : 0,
+  maximumAmount: history[history.length - 2] ? history[history.length - 2].from : 0,
 });
 
 const style = {
@@ -30,14 +31,14 @@ const Filter = (props) => {
       <input
         className={props.classes.baz}
         value={props.filterValue}
-        onChange={(e) => { props.setFilter(parseInt(e.nativeEvent.target.value, 10))}}
+        onChange={(e) => { props.setFilter(parseInt(e.nativeEvent.target.value, 10)); }}
         type="range"
         min={minMax.minimumAmount}
         max={minMax.maximumAmount}
         step="84600"
       />
       <div className={props.classes.foo}>
-        {moment.unix(props.filterValue).format("YYYY-MM-DD")}
+        {moment.unix(props.filterValue).format('YYYY-MM-DD')}
       </div>
     </div>
   );
@@ -46,7 +47,8 @@ const Filter = (props) => {
 Filter.propTypes = {
   filterValue: PropTypes.number,
   setFilter: PropTypes.func,
-  history: PropTypes.array,
+  history: PropTypes.arrayOf(HistoryPropTypes.historyElement),
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 Filter.defaultProps = {

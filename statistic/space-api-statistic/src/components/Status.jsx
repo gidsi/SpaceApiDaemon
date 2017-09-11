@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import injectSheet from 'react-jss';
+import StatusPropTypes from '../propTypes/status';
 
-const addLeadingZero = (number) => number < 10 ? `0${number}` : number;
+const addLeadingZero = number => (number < 10 ? `0${number}` : number);
 
 const toHHMMSS = (secondsCountString) => {
   const secondsCount = parseInt(secondsCountString, 10);
@@ -33,7 +34,7 @@ const style = {
 };
 
 const Status = (props) => {
-  if(props.status === null) {
+  if (props.status === null) {
     return null;
   }
 
@@ -41,7 +42,7 @@ const Status = (props) => {
     ? moment.unix(props.status.state.lastchange)
     : null;
 
-  const currentOpenTime = moment.duration(props.currentTime - props.status.state.lastchange, "seconds");
+  const currentOpenTime = moment.duration(props.currentTime - props.status.state.lastchange, 'seconds');
 
   return (
     <table className={props.classes.table}>
@@ -51,7 +52,7 @@ const Status = (props) => {
             space status
           </td>
           <td>
-            {props.status.state && props.status.state.open ? "open" : "closed"}
+            {props.status.state && props.status.state.open ? 'open' : 'closed'}
           </td>
         </tr>
         {props.status.state.lastchange && <tr className={props.classes.row}>
@@ -76,7 +77,8 @@ const Status = (props) => {
 };
 
 Status.propTypes = {
-  status: PropTypes.object,
+  status: StatusPropTypes,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   currentTime: PropTypes.number,
 };
 

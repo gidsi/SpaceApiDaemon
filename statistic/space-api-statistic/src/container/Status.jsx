@@ -1,26 +1,30 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Component from '../components/Status';
+import HistoryPropTypes from '../propTypes/history';
+import StatusPropTypes from '../propTypes/status';
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   history: store.history,
-  current: store.status,
+  status: store.status,
 });
 
 const mapDispatchToProps = {};
 
-const Status = (props) => {
-  return (
-    <Component
-      status={props.current}
-      currentTime={props.history.time}
-    />
-  );
-};
+const Status = props => (
+  <Component
+    status={props.status}
+    currentTime={props.history.time}
+  />
+);
 
 Status.propTypes = {
-  history: PropTypes.object.isRequired,
+  status: StatusPropTypes,
+  history: HistoryPropTypes.history.isRequired,
+};
+
+Status.defaultProps = {
+  status: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Status);

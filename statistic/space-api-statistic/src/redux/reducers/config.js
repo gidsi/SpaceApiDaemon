@@ -16,5 +16,15 @@ export default handleActions({
   displayHistoryChart: true,
   displayFilter: true,
   displayStatus: true,
-  chartGradient: ["#D9534E","#D47551","#D09453","#CCB054","#C6C856","#A8C458","#8CC059","#72BC5A","#5CB85C"],
+  chartGradient: [
+    '#D9534E',
+    '#D47551',
+    '#D09453',
+    '#CCB054',
+    '#C6C856',
+    '#A8C458',
+    '#8CC059',
+    '#72BC5A',
+    '#5CB85C',
+  ],
 });

@@ -5,20 +5,23 @@ import injectSheet from 'react-jss';
 import head from 'lodash.head';
 import last from 'lodash.last';
 import PercentageBar from './PercentageBar';
+import HistoryPropTypes from '../propTypes/history';
 
-const getLongestTimeOpen = (history) => history.reduce(
+const getLongestTimeOpen = history => history.reduce(
   (highest, historyElement) =>
-    (historyElement.difference && historyElement.difference > highest && historyElement.open)
+    ((historyElement.difference && historyElement.difference > highest && historyElement.open)
       ? historyElement.difference
-      : highest,
-    0);
+      : highest),
+  0,
+);
 
-const getLongestTimeClosed = (history) => history.reduce(
+const getLongestTimeClosed = history => history.reduce(
   (highest, historyElement) =>
-    (historyElement.difference && historyElement.difference > highest && !historyElement.open)
+    ((historyElement.difference && historyElement.difference > highest && !historyElement.open)
       ? historyElement.difference
-      : highest,
-  0);
+      : highest),
+  0,
+);
 
 const medianTimeOpen = (history) => {
   const list = history
@@ -40,16 +43,20 @@ const medianTimeClosed = (history) => {
 
 const percentOpen = (history) => {
   const sumTime = history.reduce((reduced, current) => ({
-      timeOpen: current.open && current.difference ? reduced.timeOpen + current.difference : reduced.timeOpen,
-      timeClosed: !current.open && current.difference ? reduced.timeClosed + current.difference : reduced.timeClosed,
-    }), { timeOpen: 0, timeClosed: 0 });
+    timeOpen: current.open && current.difference
+      ? reduced.timeOpen + current.difference
+      : reduced.timeOpen,
+    timeClosed: !current.open && current.difference
+      ? reduced.timeClosed + current.difference
+      : reduced.timeClosed,
+  }), { timeOpen: 0, timeClosed: 0 });
   const timeComplete = sumTime.timeOpen + sumTime.timeClosed;
 
   return {
     ...sumTime,
-    timeOpenPercent: sumTime.timeOpen * 100 / timeComplete,
-    timeClosedPercent: sumTime.timeClosed * 100 / timeComplete,
-  }
+    timeOpenPercent: (sumTime.timeOpen * 100) / timeComplete,
+    timeClosedPercent: (sumTime.timeClosed * 100) / timeComplete,
+  };
 };
 
 const style = {
@@ -105,10 +112,10 @@ const History = (props) => {
             <PercentageBar
               goodValue={Math.round(openingTime.timeOpenPercent)}
               goodLegend={'open'}
-              goodColor={head(props.chartGradient)}
+              goodColor={last(props.chartGradient)}
               badValue={Math.round(openingTime.timeClosedPercent)}
               badLegend={'closed'}
-              badColor={last(props.chartGradient)}
+              badColor={head(props.chartGradient)}
             />
           </td>
         </tr>
@@ -134,8 +141,9 @@ const History = (props) => {
 };
 
 History.propTypes = {
-  history: PropTypes.array,
-  chartGradient: PropTypes.array.isRequired,
+  history: PropTypes.arrayOf(HistoryPropTypes.historyElement).isRequired,
+  chartGradient: PropTypes.arrayOf(PropTypes.string).isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default injectSheet(style)(History);

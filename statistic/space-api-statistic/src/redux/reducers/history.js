@@ -20,7 +20,7 @@ export const fetchHistory = () => (dispatch, getStore) => {
         if (!err) {
           dispatch(fetched(res.body));
         }
-      }
+      },
     );
 };
 
@@ -35,7 +35,8 @@ export default handleActions({
     ...state,
     items: payload.items
       .sort((a, b) => a.lastchange - b.lastchange)
-      .map((data, index, array) => {
+      .map(
+        (data, index, array) => {
           const nextElement = array[index + 1];
           return {
             difference: nextElement ? nextElement.lastchange - data.lastchange : null,
@@ -43,8 +44,8 @@ export default handleActions({
             till: nextElement ? nextElement.lastchange : null,
             open: data.open,
           };
-        }
-      )
+        },
+      ),
   }),
   [SET_FILTER]: (state, { payload }) => ({
     ...state,

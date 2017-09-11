@@ -30,7 +30,7 @@ const style = {
 const PercentageBar = (props) => {
   const total = props.goodValue + props.badValue;
 
-  if(total === 0) {
+  if (total === 0) {
     return null;
   }
 
@@ -62,6 +62,7 @@ PercentageBar.propTypes = {
   badValue: PropTypes.number,
   badLegend: PropTypes.string,
   badColor: PropTypes.string,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 PercentageBar.defaultProps = {

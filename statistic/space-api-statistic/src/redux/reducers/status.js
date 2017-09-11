@@ -15,7 +15,7 @@ export const fetchStatus = () => (dispatch, getStore) => {
         if (!err) {
           dispatch(fetched(res.body));
         }
-      }
+      },
     );
 };
 

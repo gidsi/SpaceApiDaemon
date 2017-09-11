@@ -5,20 +5,21 @@ import moment from 'moment';
 import injectSheet from 'react-jss';
 import classnames from 'classnames';
 import gradient from '../gradient-color';
+import HistoryPropTypes from '../propTypes/history';
 
-const gradientColor = gradient(["#D9534E","#D47551","#D09453","#CCB054","#C6C856","#A8C458","#8CC059","#72BC5A","#5CB85C"], 101);
 const weekdayNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-const getPercentageOpen = day => Math.round(day.open * 100 / (day.open + day.close)) | 0;
+const getPercentageOpen = day => Math.round((day.open * 100) / (day.open + day.close)) || 0;
 
 const getColorStyles = gradientColor => gradientColor.reduce(
   (acc, color, index) => ({
     ...acc,
-    ['color-block-' + index]: {
+    [`color-block-${index}`]: {
       borderColor: color,
       backgroundColor: color,
-      color: color,
+      color,
     },
-  }), style);
+  }),
+);
 
 const initHourWeekdayHistoryGrid = () => range(7).map(
   weekday => range(24).map(
@@ -27,22 +28,25 @@ const initHourWeekdayHistoryGrid = () => range(7).map(
       hour,
       open: 0,
       close: 0,
-    })
-  ));
+    }),
+  ),
+);
 
 const formatHistoryIntoGrid = (history) => {
   const hourWeekdayHistoryGrid = initHourWeekdayHistoryGrid();
   const openTimeArray = history.filter(historyElement => historyElement.open);
-  if(openTimeArray.length > 0) {
+  if (openTimeArray.length > 0) {
     const hourWalker = moment.unix(openTimeArray[0].from);
     const now = moment();
-    while(hourWalker < now) {
+    while (hourWalker < now) {
       const hourWalkerUnix = hourWalker.unix();
-      const element = openTimeArray.filter(openTime => openTime.from <= hourWalkerUnix && openTime.till >= hourWalkerUnix);
-      if(element.length > 0) {
-        hourWeekdayHistoryGrid[hourWalker.isoWeekday() - 1][hourWalker.hour()].open++;
+      const element = openTimeArray.filter(
+        openTime => openTime.from <= hourWalkerUnix && openTime.till >= hourWalkerUnix,
+      );
+      if (element.length > 0) {
+        hourWeekdayHistoryGrid[hourWalker.isoWeekday() - 1][hourWalker.hour()].open += 1;
       } else {
-        hourWeekdayHistoryGrid[hourWalker.isoWeekday() - 1][hourWalker.hour()].close++;
+        hourWeekdayHistoryGrid[hourWalker.isoWeekday() - 1][hourWalker.hour()].close += 1;
       }
       hourWalker.add(1, 'hours');
     }
@@ -101,10 +105,11 @@ const style = {
     overflow: 'hidden',
     border: '1px transparent solid',
     color: 'black',
-    transition: 'color 700ms, background-color 700ms',
+    transition: 'color 15s, background-color 15s',
     cursor: 'pointer',
     '&:hover': {
       color: 'white !important',
+      transition: 'color 200ms, background-color 200ms',
     },
   },
   legendDays: {
@@ -114,28 +119,27 @@ const style = {
 };
 
 const HistoryChart = (props) => {
-
-  const colorStyles = getColorStyles(gradient(props.chartGradient, 101));
+  const gradientColors = gradient(props.chartGradient, 101);
+  const colorStyles = getColorStyles(gradientColors);
 
   return (
     <div className={props.classes.container}>
       <div>
         <div className={props.classes.legendHours}>
-          <div className={classnames(props.classes.block, props.classes.legendDays)}>
-          </div>
-          {initHourWeekdayHistoryGrid()[0].map((day, index) => (
+          <div className={classnames(props.classes.block, props.classes.legendDays)} />
+          {initHourWeekdayHistoryGrid()[0].map(day => (
             <div
-              key={'hour_legend_' + index}
+              key={`hour_legend_${day.hour}`}
               className={props.classes.block}
-              title={index}
+              title={day.hour}
             >
-              {index}
+              {day.hour}
             </div>
           ))}
         </div>
       </div>
       {formatHistoryIntoGrid(props.history).map((weekdays, index) => (
-        <div key={'day_legend_' + index} >
+        <div key={`day_legend_${weekdays[0].weekday}`} >
           <div className={props.classes.daysRow}>
             <div
               className={classnames(props.classes.legendDays, props.classes.block)}
@@ -143,10 +147,10 @@ const HistoryChart = (props) => {
             >
               {weekdayNames[index]}
             </div>
-            {weekdays.map((day, index) => (
+            {weekdays.map(day => (
               <div
-                key={day.weekday + '_' + day.hour + '_' + getPercentageOpen(day)}
-                style={colorStyles['color-block-' + getPercentageOpen(day)]}
+                key={`${day.weekday}_${day.hour}_${getPercentageOpen(day)}`}
+                style={colorStyles[`color-block-${getPercentageOpen(day)}`]}
                 className={props.classes.block}
               >
                 {getPercentageOpen(day)}
@@ -156,11 +160,11 @@ const HistoryChart = (props) => {
         </div>
       ))}
       <div className={props.classes.legendColor}>
-        {gradientColor.map((color, index) => (
+        {gradientColors.map((color, index) => (
           <div
-            key={'percent_legend_' + index}
+            key={`percent_legend_${color}`}
             title={index}
-            style={colorStyles['color-block-' + index]}
+            style={colorStyles[`color-block-${index}`]}
             className={props.classes.legendColorBlock}
           />
         ))}
@@ -178,11 +182,12 @@ const HistoryChart = (props) => {
       </div>
     </div>
   );
-}
+};
 
 HistoryChart.propTypes = {
-  history: PropTypes.array,
-  chartGradient: PropTypes.array.isRequired,
+  history: PropTypes.arrayOf(HistoryPropTypes.historyElement).isRequired,
+  chartGradient: PropTypes.arrayOf(PropTypes.string).isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 HistoryChart.default = {

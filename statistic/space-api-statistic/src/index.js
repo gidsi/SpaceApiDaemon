@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'
-import { actions as configActions } from './redux/reducers/config'
-import jss from 'jss'
-import preset from 'jss-preset-default'
+import { Provider } from 'react-redux';
+import jss from 'jss';
+import preset from 'jss-preset-default';
+import { actions as configActions } from './redux/reducers/config';
 
 import store from './redux/store';
 
 import App from './App';
 
-jss.setup(preset())
+jss.setup(preset());
 
-export const SpaceApiStatistic = (id, config) => {
+export const SpaceApiStatistic = (element, config) => {
   store.dispatch(configActions.setConfig(config));
   ReactDOM.render(
     <Provider store={store}>
@@ -19,16 +19,14 @@ export const SpaceApiStatistic = (id, config) => {
         <App />
       </div>
     </Provider>,
-    document.getElementById(id)
+    element,
   );
 };
 
-window.SpaceApiStatistic = SpaceApiStatistic;
+export default SpaceApiStatistic;
 
-
-SpaceApiStatistic('root', {
+SpaceApiStatistic(document.getElementById('root'), {
   apiUrl: 'https://newstatus.chaospott.de/api',
   displayFilter: true,
   displayStatus: true,
-  chartGradient: ['#012D41', '#1BA5B8', '#DAECF3', '#FF404E', '#1CA5B8'],
 });

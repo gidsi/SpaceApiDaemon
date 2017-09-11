@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { actions as statusActions } from './redux/reducers/status';
 import { actions as historyActions } from './redux/reducers/history';
-import Status from "./container/Status";
-import HistoryChart from "./container/HistoryChart";
-import History from "./container/History";
-import Filter from "./container/Filter";
+import Status from './container/Status';
+import HistoryChart from './container/HistoryChart';
+import History from './container/History';
+import Filter from './container/Filter';
+import ConfigPropTypes from './propTypes/config';
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   config: store.config,
 });
 
@@ -40,9 +41,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  current: PropTypes.object,
-  history: PropTypes.object,
-  config: PropTypes.object,
+  config: ConfigPropTypes.isRequired,
+  fetchStatus: PropTypes.func.isRequired,
+  fetchHistory: PropTypes.func.isRequired,
+  setTime: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
