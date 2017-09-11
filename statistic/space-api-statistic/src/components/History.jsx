@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import injectSheet from 'react-jss';
+import head from 'lodash.head';
+import last from 'lodash.last';
+import PercentageBar from './PercentageBar';
 
 const getLongestTimeOpen = (history) => history.reduce(
   (highest, historyElement) =>
@@ -48,6 +52,25 @@ const percentOpen = (history) => {
   }
 };
 
+const style = {
+  table: {
+    marginTop: '30px',
+    width: '100%',
+  },
+  row: {
+    borderTop: '1px #ddd solid',
+    '&:hover': {
+      backgroundColor: '#eee',
+    },
+    '& td:first-child': {
+      width: '40%',
+    },
+  },
+  cell: {
+
+  },
+};
+
 const History = (props) => {
   const longestTimeOpen = moment.duration(getLongestTimeOpen(props.history), 'seconds');
   const longestTimeClosed = moment.duration(getLongestTimeClosed(props.history), 'seconds');
@@ -56,65 +79,63 @@ const History = (props) => {
   const medianTimeClosedObj = moment.duration(medianTimeClosed(props.history), 'seconds');
 
   return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              Longest time open
-            </td>
-            <td>
-              {longestTimeOpen.humanize()}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Longest time closed
-            </td>
-            <td>
-              {longestTimeClosed.humanize()}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Time open %
-            </td>
-            <td>
-              {Math.round(openingTime.timeOpenPercent)}%
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Time closed %
-            </td>
-            <td>
-              {Math.round(openingTime.timeClosedPercent)}%
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Median Time Open
-            </td>
-            <td>
-              {medianTimeOpenObj.humanize()}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Median Time Closed
-            </td>
-            <td>
-              {medianTimeClosedObj.humanize()}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table className={props.classes.table}>
+      <tbody>
+        <tr className={props.classes.row}>
+          <td className={props.classes.cell}>
+            longest time open
+          </td>
+          <td>
+            {longestTimeOpen.humanize()}
+          </td>
+        </tr>
+        <tr className={props.classes.row}>
+          <td>
+            longest time closed
+          </td>
+          <td>
+            {longestTimeClosed.humanize()}
+          </td>
+        </tr>
+        <tr className={props.classes.row}>
+          <td>
+            open / closed ratio
+          </td>
+          <td>
+            <PercentageBar
+              goodValue={Math.round(openingTime.timeOpenPercent)}
+              goodLegend={'open'}
+              goodColor={head(props.chartGradient)}
+              badValue={Math.round(openingTime.timeClosedPercent)}
+              badLegend={'closed'}
+              badColor={last(props.chartGradient)}
+            />
+          </td>
+        </tr>
+        <tr className={props.classes.row}>
+          <td>
+            median time open
+          </td>
+          <td>
+            {medianTimeOpenObj.humanize()}
+          </td>
+        </tr>
+        <tr className={props.classes.row}>
+          <td>
+            median time closed
+          </td>
+          <td>
+            {medianTimeClosedObj.humanize()}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 };
 
 History.propTypes = {
   history: PropTypes.array,
+  chartGradient: PropTypes.array.isRequired,
 };
 
-export default History;
+export default injectSheet(style)(History);

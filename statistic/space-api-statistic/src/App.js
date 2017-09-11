@@ -10,8 +10,7 @@ import History from "./container/History";
 import Filter from "./container/Filter";
 
 const mapStateToProps = (store) => ({
-  current: store.status,
-  history: store.history,
+  config: store.config,
 });
 
 const mapDispatchToProps = {
@@ -31,10 +30,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Status />
-        <Filter />
-        <History />
-        <HistoryChart />
+        {this.props.config.displayStatus && <Status />}
+        {this.props.config.displayFilter && <Filter />}
+        {this.props.config.displayHistory && <History />}
+        {this.props.config.displayHistoryChart && <HistoryChart />}
       </div>
     );
   }
@@ -43,6 +42,7 @@ class App extends Component {
 App.propTypes = {
   current: PropTypes.object,
   history: PropTypes.object,
+  config: PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -10,9 +10,10 @@ export const fetched = createAction(HISTORY_FETCHED, result => result);
 export const setFilter = createAction(SET_FILTER, result => result);
 export const setTime = createAction(SET_TIME, result => result);
 
-export const fetchHistory = () => (dispatch) => {
+export const fetchHistory = () => (dispatch, getStore) => {
+  const store = getStore();
   request
-    .get(`https://newstatus.chaospott.de/api/history/state`)
+    .get(`${store.config.apiUrl}/history/state`)
     .set('Content-Type', 'application/json')
     .end(
       (err, res) => {

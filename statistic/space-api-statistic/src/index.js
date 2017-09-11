@@ -1,24 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { actions as configActions } from './redux/reducers/config'
+import jss from 'jss'
+import preset from 'jss-preset-default'
 
 import store from './redux/store';
-import registerServiceWorker from './registerServiceWorker';
 
 import App from './App';
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router>
+jss.setup(preset())
+
+export const SpaceApiStatistic = (id, config) => {
+  store.dispatch(configActions.setConfig(config));
+  ReactDOM.render(
+    <Provider store={store}>
       <div>
-        <Route exact path="/" component={App}/>
+        <App />
       </div>
-    </Router>
-  </Provider>,
-  document.getElementById('root')
-);
-registerServiceWorker();
+    </Provider>,
+    document.getElementById(id)
+  );
+};
+
+window.SpaceApiStatistic = SpaceApiStatistic;
+
+
+SpaceApiStatistic('root', {
+  apiUrl: 'https://newstatus.chaospott.de/api',
+  displayFilter: true,
+  displayStatus: true,
+  chartGradient: ['#012D41', '#1BA5B8', '#DAECF3', '#FF404E', '#1CA5B8'],
+});

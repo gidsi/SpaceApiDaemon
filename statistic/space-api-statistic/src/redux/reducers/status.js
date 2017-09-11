@@ -5,9 +5,10 @@ const STATUS_FETCHED = 'STATUS_FETCHED';
 
 export const fetched = createAction(STATUS_FETCHED, result => result);
 
-export const fetchStatus = () => (dispatch) => {
+export const fetchStatus = () => (dispatch, getStore) => {
+  const store = getStore();
   request
-    .get(`https://newstatus.chaospott.de/api/`)
+    .get(`${store.config.apiUrl}`)
     .set('Content-Type', 'application/json')
     .end(
       (err, res) => {
