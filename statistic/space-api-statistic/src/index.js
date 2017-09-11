@@ -13,6 +13,7 @@ jss.setup(preset());
 
 export const SpaceApiStatistic = (element, config) => {
   store.dispatch(configActions.setConfig(config));
+  /* eslint-disable react/jsx-filename-extension */
   ReactDOM.render(
     <Provider store={store}>
       <div>
@@ -21,12 +22,7 @@ export const SpaceApiStatistic = (element, config) => {
     </Provider>,
     element,
   );
+  /* eslint-enable react/jsx-filename-extension */
 };
 
 export default SpaceApiStatistic;
-
-SpaceApiStatistic(document.getElementById('root'), {
-  apiUrl: 'https://newstatus.chaospott.de/api',
-  displayFilter: true,
-  displayStatus: true,
-});

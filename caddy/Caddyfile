@@ -8,6 +8,10 @@ proxy /api daemon:8080/ {
     without /api
 }
 
+/js {
+  root /js
+}
+
 gzip
 log stdout
 errors stdout

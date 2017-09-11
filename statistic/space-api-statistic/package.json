@@ -5,7 +5,6 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "color": "^2.0.0",
-    "eslint-config-airbnb": "^15.1.0",
     "history": "^4.7.2",
     "jss": "^8.1.0",
     "jss-preset-default": "^3.0.0",
@@ -32,9 +31,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src",
+    "copyFile": "sed -i '$ d' build/static/js/main.*.js && cp build/static/js/main.*.js ../../caddy/js/spaceApiDaemon.js",
+    "generateFile": "yarn lint && yarn build && yarn copyFile",
+    "precommit": "yarn generateFile"
   },
   "devDependencies": {
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb": "^15.1.0",
+    "husky": "^0.14.3",
     "prettier": "^1.6.1"
   }
 }
