@@ -19,6 +19,7 @@ func main() {
 		locationRoutes,
 		authenticationRoutes,
 		historyRoutes,
+		importRoutes,
 		baseDataRoutes,
 		contactRoutes,
 		feedRoutes,

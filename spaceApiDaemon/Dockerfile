@@ -10,4 +10,6 @@ COPY main .
 RUN go-wrapper download
 RUN go-wrapper install
 
+ENV SOURCE_COMMIT ${SOURCE_COMMIT:-unknown}
+
 CMD ["go-wrapper", "run"]

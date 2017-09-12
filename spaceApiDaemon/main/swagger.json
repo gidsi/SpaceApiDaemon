@@ -1100,7 +1100,7 @@
         }
       }
     },
-    "/importN39": {
+    "/importN39History": {
       "get": {
         "security": [
           {
@@ -1108,11 +1108,41 @@
           }
         ],
         "tags": [
-          "history"
+          "import"
         ],
         "responses": {
           "200": {
             "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/importJsonFile": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "import"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpaceApi"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SpaceApi"
+            }
           }
         }
       }

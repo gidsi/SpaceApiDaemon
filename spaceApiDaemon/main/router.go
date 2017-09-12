@@ -6,6 +6,7 @@ import (
 	"log"
 	"strings"
 	"time"
+	"os"
 )
 
 func setupRouter(routes routes) *mux.Router {
@@ -82,6 +83,7 @@ func setCORSHeader(methods []string, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", checkAllowedOrigin(r))
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Access-Control-Allow-Methods", strings.Join(methods[:],", "))
+	w.Header().Set("X-SpaceApiDaemon-Build", os.Getenv("SOURCE_COMMIT"))
 }
 
 // TODO: config.AllowedOrigins should be a regular expression
