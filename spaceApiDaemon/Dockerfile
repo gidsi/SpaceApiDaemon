@@ -1,3 +1,6 @@
+ARG SOURCE_COMMIT=${SOURCE_COMMIT:-unknown}
+ARG DOCKER_TAG=${DOCKER_TAG:-unknown}
+
 FROM golang:alpine
 
 RUN apk add --no-cache git
@@ -10,10 +13,7 @@ COPY main .
 RUN go-wrapper download
 RUN go-wrapper install
 
-ARG SOURCE_COMMIT=${SOURCE_COMMIT:-unknown}
-ARG DOCKER_TAG=${DOCKER_TAG:-unknown}
-
-RUN echo $SOURCE_COMMIT
-RUN echo $DOCKER_TAG
+ENV SOURCE_COMMIT=${SOURCE_COMMIT}
+ENV DOCKER_TAG=${DOCKER_TAG}
 
 CMD ["go-wrapper", "run"]
