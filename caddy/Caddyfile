@@ -1,4 +1,5 @@
 {$SPACEAPIURL}
+root /js
 
 proxy /edit swagger:8080 {
     without /edit
