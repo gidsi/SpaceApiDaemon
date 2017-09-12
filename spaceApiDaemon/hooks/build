@@ -1,2 +1,4 @@
 #!/bin/bash
-docker build --build-arg SOURCE_COMMIT=${SOURCE_COMMIT:-unknown} --build-arg DOCKER_TAG=${DOCKER_TAG:-unknown} -t ${IMAGE_NAME:-spaceapidaemon} .
+COMMAND="docker build --build-arg SOURCE_COMMIT=${SOURCE_COMMIT:-unknown} --build-arg DOCKER_TAG=${DOCKER_TAG:-unknown} -t ${IMAGE_NAME:-spaceapi/daemon} ."
+echo $COMMAND
+eval $COMMAND

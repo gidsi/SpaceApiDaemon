@@ -1,7 +1,7 @@
-ARG SOURCE_COMMIT=${SOURCE_COMMIT:-unknown}
-ARG DOCKER_TAG=${DOCKER_TAG:-unknown}
-
 FROM golang:alpine
+
+ARG SOURCE_COMMIT=unknown
+ARG DOCKER_TAG=unknown
 
 RUN apk add --no-cache git
 
