@@ -10,8 +10,8 @@ COPY main .
 RUN go-wrapper download
 RUN go-wrapper install
 
-ENV SOURCE_COMMIT ${SOURCE_COMMIT:-unknown}
-ENV DOCKER_TAG ${DOCKER_TAG:-unknown}
+ARG SOURCE_COMMIT=${SOURCE_COMMIT:-unknown}
+ARG DOCKER_TAG=${DOCKER_TAG:-unknown}
 
 RUN echo $SOURCE_COMMIT
 RUN echo $DOCKER_TAG
