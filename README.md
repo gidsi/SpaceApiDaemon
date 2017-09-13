@@ -43,3 +43,8 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MDE3OTQzNzN9.qOW5dnW-HtXm9GotAO
 9. Your SpaceApi is now running at https://yourdomain/api/
 
 10. Profit!
+
+You can import your current SpaceApi file by using the /api/importJsonFile route. You can also import your histroy using the data collected by [n39](http://spaceapi-stats.n39.eu), using the /api/importN39History route (please just use it once, otherwise you will be left with duplicated data).
+
+**Note**:
+Set your spacename before using the n39 import, it will be used for importing.
