@@ -19,6 +19,7 @@ const getColorStyles = gradientColor => gradientColor.reduce(
       color,
     },
   }),
+  {},
 );
 
 const initHourWeekdayHistoryGrid = () => range(7).map(
