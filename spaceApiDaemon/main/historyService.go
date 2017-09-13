@@ -40,7 +40,7 @@ func getHistoryState(w http.ResponseWriter, _ *http.Request) {
 
 	if err == nil {
 		for i := range spaceData {
-			if spaceData[i].Data.State != nil {
+			if spaceData[i].Data.State != nil && spaceData[i].Data.State.Lastchange != 0 {
 				filteredStates[spaceData[i].Data.State.Lastchange] = *spaceData[i].Data.State
 			}
 		}
