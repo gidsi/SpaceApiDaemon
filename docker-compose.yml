@@ -5,8 +5,7 @@ services:
     volumes:
       - ${DATA_FOLDER}/db:/data/db
   daemon:
-    #image: spaceapi/daemon
-    build: ./spaceApiDaemon
+    image: spaceapi/daemon
     depends_on:
       - database
     expose:
