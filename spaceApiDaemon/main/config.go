@@ -38,6 +38,6 @@ func initConfig() {
 	config.AllowedOrigins = strings.Split(*allowedOriginsFlag, ",")
 
 	if config.SigningKey == "" {
-		panic("Signing key not provided, please add a key with a value for \"signing_key\" to your config.yaml")
+		panic("Signing key not provided, please add a key with a value for \"signingKey\" to your config.yaml")
 	}
 }

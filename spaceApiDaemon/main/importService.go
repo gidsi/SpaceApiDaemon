@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"strings"
+	"github.com/gidsi/SpaceApiSpec/v013"
 )
 
 var importRoutes = routes{
@@ -14,13 +15,13 @@ var importRoutes = routes{
 		true,
 		importFromN39,
 	},
-	/* route{
+	route{
 		"Import SpaceApi status",
 		"PUT",
 		"/importJsonFile",
 		true,
 		importSpaceApiStatus,
-	}, */
+	},
 }
 
 type n39State struct {
@@ -57,9 +58,8 @@ func importFromN39(_ http.ResponseWriter, _ *http.Request) {
 	}
 }
 
-/*
-func importSpaceApiStatus(_ http.ResponseWriter, _ *http.Request) {
-	 spaceData, _ := readLastSpaceData()
-	foo := spaceapi_spec.Root{}
+func importSpaceApiStatus(w http.ResponseWriter, r *http.Request) {
+	spaceApiStatus := spaceapi_spec.Root{}
+	createEntry(&spaceApiStatus, w, r)
+	writeSpaceData(spaceApiStatus)
 }
-*/

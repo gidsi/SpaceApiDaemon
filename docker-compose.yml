@@ -4,16 +4,9 @@ services:
     image: mongo:latest
     volumes:
       - ${DATA_FOLDER}/db:/data/db
-  databaseadmin:
-    image: mongo-express
-    depends_on:
-      - database
-    ports:
-      - 8081:8081
-    links:
-      - database:mongo
   daemon:
-    image: spaceapi/daemon
+    #image: spaceapi/daemon
+    build: ./spaceApiDaemon
     depends_on:
       - database
     expose:
