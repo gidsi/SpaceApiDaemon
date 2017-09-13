@@ -1,5 +1,4 @@
-SpaceApiDaemon deployment
-=========================
+# SpaceApiDaemon deployment
 
 **Work in progress, do not use in production!**
 
@@ -9,8 +8,7 @@ Goal is to give more people/systems access to change values in your SpaceApi eas
 
 It will also provide a history for e.g. your opening times.
 
-How to start
-------------
+## How to start
 1. Install [docker](https://docs.docker.com/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/).
 2. Change the enviroment variables in the .evn file according to your needs. (Set the SPACEAPIURL to localhost if you gonna use a reverse proxy)
 3. Create data and config folder
@@ -44,7 +42,43 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MDE3OTQzNzN9.qOW5dnW-HtXm9GotAO
 
 10. Profit!
 
+## Importing data
 You can import your current SpaceApi file by using the /api/importJsonFile route. You can also import your histroy using the data collected by [n39](http://spaceapi-stats.n39.eu), using the /api/importN39History route (please just use it once, otherwise you will be left with duplicated data).
 
 **Note**:
 Set your spacename before using the n39 import, it will be used for importing.
+
+## Displaying statistics
+Add the following to your website
+```html
+<div id="root"></div>
+<script src="https://yourdomain/spaceApiDaemon.js">
+</script>
+<script>
+    window.SpaceApiStatistic(
+      document.getElementById('root'), // html element
+      { apiUrl: 'https://yourdomain/api' } // configuration object
+    );
+</script>
+```
+
+There are also a few additional configuration parameters
+````js
+{
+  displayHistory: true, // show history data
+  displayHistoryChart: true, // show history chart
+  displayFilter: true, // show filter for the history data (by default it shows the last year)
+  displayStatus: true, // show current status
+  chartGradient: [
+    '#D9534E',
+    '#D47551',
+    '#D09453',
+    '#CCB054',
+    '#C6C856',
+    '#A8C458',
+    '#8CC059',
+    '#72BC5A',
+    '#5CB85C',
+  ] // replace charts gradient color with your own (these are just steps, in total the system will generate a hundered different ones)
+}
+````

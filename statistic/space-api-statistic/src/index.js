@@ -25,4 +25,6 @@ export const SpaceApiStatistic = (element, config) => {
   /* eslint-enable react/jsx-filename-extension */
 };
 
+window.SpaceApiStatistic = SpaceApiStatistic; // eslint-disable-line no-undef
+
 export default SpaceApiStatistic;
