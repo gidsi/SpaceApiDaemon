@@ -11,7 +11,7 @@ import App from './App';
 
 jss.setup(preset());
 
-export const SpaceApiStatistic = (element, config) => {
+const SpaceApiStatistic = (element, config) => {
   store.dispatch(configActions.setConfig(config));
   /* eslint-disable react/jsx-filename-extension */
   ReactDOM.render(
