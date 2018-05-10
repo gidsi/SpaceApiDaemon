@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"strings"
-	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/spaceapi-community/go-spaceapi-spec/v13"
 )
 
 var importRoutes = routes{
@@ -59,7 +59,7 @@ func importFromN39(_ http.ResponseWriter, _ *http.Request) {
 }
 
 func importSpaceApiStatus(w http.ResponseWriter, r *http.Request) {
-	spaceApiStatus := spaceapi_spec.Root{}
+	spaceApiStatus := spaceapiStruct.SpaceAPI013{}
 	createEntry(&spaceApiStatus, w, r)
 	writeSpaceData(spaceApiStatus)
 }

@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/spaceapi-community/go-spaceapi-spec/v13"
 	"github.com/gorilla/mux"
 )
 
@@ -169,10 +169,10 @@ func changeIssueMail(w http.ResponseWriter, r *http.Request) {
 func addKeymaster(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 	if spaceData.Contact == nil {
-		spaceData.Contact = &spaceapi_spec.Contact{}
+		spaceData.Contact = &spaceapiStruct.Contact{}
 	}
 
-	requestKeymaster := spaceapi_spec.Keymaster{}
+	requestKeymaster := spaceapiStruct.Keymasters{}
 	createEntry(&requestKeymaster, w, r)
 
 	spaceData.Contact.Keymasters = append(spaceData.Contact.Keymasters, requestKeymaster)
@@ -183,7 +183,7 @@ func addKeymaster(w http.ResponseWriter, r *http.Request) {
 func removeKeymaster(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 	if spaceData.Contact == nil {
-		spaceData.Contact = &spaceapi_spec.Contact{}
+		spaceData.Contact = &spaceapiStruct.Contact{}
 	}
 
 	vars := mux.Vars(r)
@@ -202,14 +202,14 @@ func removeKeymaster(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func contactHelper(w http.ResponseWriter, r *http.Request) (string, spaceapi_spec.Root) {
+func contactHelper(w http.ResponseWriter, r *http.Request) (string, spaceapiStruct.SpaceAPI013) {
 	spaceData, _ := readLastSpaceData()
 
 	requestSpaceData := singleValue{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.Contact == nil {
-		spaceData.Contact = &spaceapi_spec.Contact{}
+		spaceData.Contact = &spaceapiStruct.Contact{}
 	}
 
 	return requestSpaceData.Value, spaceData

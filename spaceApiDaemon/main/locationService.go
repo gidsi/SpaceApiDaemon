@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/spaceapi-community/go-spaceapi-spec/v13"
 )
 
 var locationRoutes = routes{
@@ -18,7 +18,7 @@ var locationRoutes = routes{
 func changeLocation(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := spaceapi_spec.Location{}
+	requestSpaceData := spaceapiStruct.Location{}
 	createEntry(&requestSpaceData, w, r)
 	spaceData.Location = &requestSpaceData
 

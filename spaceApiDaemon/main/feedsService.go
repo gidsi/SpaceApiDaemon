@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/spaceapi-community/go-spaceapi-spec/v13"
 )
 
 var feedRoutes = routes{
@@ -37,46 +37,55 @@ var feedRoutes = routes{
 }
 
 func changeBlogFeed(w http.ResponseWriter, r *http.Request) {
-	spaceData, feedData := feedsHelper(w, r)
+	spaceData, _ := readLastSpaceData()
+	feedsHelper(&spaceData)
 
-	spaceData.Feeds.Blog = &feedData
+	requestSpaceData := spaceapiStruct.Blog{}
+	createEntry(&requestSpaceData, w, r)
+
+	spaceData.Feeds.Blog = &requestSpaceData
 
 	writeSpaceData(spaceData)
 }
 
 func changeWikiFeed(w http.ResponseWriter, r *http.Request) {
-	spaceData, feedData := feedsHelper(w, r)
+	spaceData, _ := readLastSpaceData()
+	feedsHelper(&spaceData)
 
-	spaceData.Feeds.Blog = &feedData
+	requestSpaceData := spaceapiStruct.Wiki{}
+	createEntry(&requestSpaceData, w, r)
+
+	spaceData.Feeds.Wiki = &requestSpaceData
 
 	writeSpaceData(spaceData)
 }
 
 func changeCalendarFeed(w http.ResponseWriter, r *http.Request) {
-	spaceData, feedData := feedsHelper(w, r)
+	spaceData, _ := readLastSpaceData()
+	feedsHelper(&spaceData)
 
-	spaceData.Feeds.Blog = &feedData
+	requestSpaceData := spaceapiStruct.Calendar{}
+	createEntry(&requestSpaceData, w, r)
+
+	spaceData.Feeds.Calendar = &requestSpaceData
 
 	writeSpaceData(spaceData)
 }
 
 func changeFlickrFeed(w http.ResponseWriter, r *http.Request) {
-	spaceData, feedData := feedsHelper(w, r)
+	spaceData, _ := readLastSpaceData()
+	feedsHelper(&spaceData)
 
-	spaceData.Feeds.Blog = &feedData
+	requestSpaceData := spaceapiStruct.Flickr{}
+	createEntry(&requestSpaceData, w, r)
+
+	spaceData.Feeds.Flickr = &requestSpaceData
 
 	writeSpaceData(spaceData)
 }
 
-func feedsHelper(w http.ResponseWriter, r *http.Request) (spaceapi_spec.Root, spaceapi_spec.Feed) {
-	spaceData, _ := readLastSpaceData()
-
-	requestSpaceData := spaceapi_spec.Feed{}
-	createEntry(&requestSpaceData, w, r)
-
+func feedsHelper(spaceData *spaceapiStruct.SpaceAPI013) {
 	if spaceData.Feeds == nil {
-		spaceData.Feeds = &spaceapi_spec.Feeds{}
+		spaceData.Feeds = &spaceapiStruct.Feeds{}
 	}
-
-	return spaceData, requestSpaceData
 }

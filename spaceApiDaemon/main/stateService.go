@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/spaceapi-community/go-spaceapi-spec/v13"
 	"time"
 )
 
@@ -18,7 +18,7 @@ var stateRoutes = routes{
 
 type stateShort struct {
 	Open          bool `json:"open"`
-	Lastchange    int `json:"lastchange,omitempty"`
+	Lastchange    float64 `json:"lastchange,omitempty"`
 	TriggerPerson string `json:"trigger_person,omitempty"`
 	Message       string `json:"message,omitempty"`
 }
@@ -30,11 +30,11 @@ func changeState(w http.ResponseWriter, r *http.Request) {
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.State == nil {
-		spaceData.State = &spaceapi_spec.State{}
+		spaceData.State = &spaceapiStruct.State{}
 	}
 
 	if spaceData.State.Open != requestSpaceData.Open && requestSpaceData.Lastchange == 0 {
-		spaceData.State.Lastchange = int(time.Now().Unix())
+		spaceData.State.Lastchange = float64(time.Now().Unix())
 	} else {
 		spaceData.State.Lastchange = requestSpaceData.Lastchange
 	}

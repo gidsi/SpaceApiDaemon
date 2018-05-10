@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/spaceapi-community/go-spaceapi-spec/v13"
 	"github.com/gorilla/mux"
 )
 
@@ -75,11 +75,11 @@ var sensorsRoutes = routes{
 func addDoorLocked(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := spaceapi_spec.DoorLocked{}
+	requestSpaceData := spaceapiStruct.DoorLocked{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	spaceData.Sensors.DoorLocked = append(spaceData.Sensors.DoorLocked, requestSpaceData)
@@ -91,12 +91,12 @@ func changeDoorLocked(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 	vars := mux.Vars(r)
 
-	requestSpaceData := spaceapi_spec.DoorLocked{}
+	requestSpaceData := spaceapiStruct.DoorLocked{}
 	createEntry(&requestSpaceData, w, r)
 	requestSpaceData.Location = vars["location"]
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	for i := 0; i < len(spaceData.Sensors.DoorLocked); i++ {
@@ -113,11 +113,11 @@ func changeDoorLocked(w http.ResponseWriter, r *http.Request) {
 func removeDoorLocked(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := spaceapi_spec.DoorLocked{}
+	requestSpaceData := spaceapiStruct.DoorLocked{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	vars := mux.Vars(r)
@@ -138,11 +138,11 @@ func removeDoorLocked(w http.ResponseWriter, r *http.Request) {
 func addTemperature(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := spaceapi_spec.Temperature{}
+	requestSpaceData := spaceapiStruct.Temperature{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	spaceData.Sensors.Temperature = append(spaceData.Sensors.Temperature, requestSpaceData)
@@ -155,12 +155,12 @@ func changeTemperature(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 	vars := mux.Vars(r)
 
-	requestSpaceData := spaceapi_spec.Temperature{}
+	requestSpaceData := spaceapiStruct.Temperature{}
 	createEntry(&requestSpaceData, w, r)
 	requestSpaceData.Location = vars["location"]
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	for i := 0; i < len(spaceData.Sensors.Temperature); i++ {
@@ -177,11 +177,11 @@ func changeTemperature(w http.ResponseWriter, r *http.Request) {
 func removeTemperature(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := spaceapi_spec.Temperature{}
+	requestSpaceData := spaceapiStruct.Temperature{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	vars := mux.Vars(r)
@@ -202,11 +202,11 @@ func removeTemperature(w http.ResponseWriter, r *http.Request) {
 func addHumidity(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := spaceapi_spec.Humidity{}
+	requestSpaceData := spaceapiStruct.Humidity{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	spaceData.Sensors.Humidity = append(spaceData.Sensors.Humidity, requestSpaceData)
@@ -218,12 +218,12 @@ func changeHumidity(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 	vars := mux.Vars(r)
 
-	requestSpaceData := spaceapi_spec.Humidity{}
+	requestSpaceData := spaceapiStruct.Humidity{}
 	createEntry(&requestSpaceData, w, r)
 	requestSpaceData.Location = vars["location"]
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	for i := 0; i < len(spaceData.Sensors.Humidity); i++ {
@@ -239,11 +239,11 @@ func changeHumidity(w http.ResponseWriter, r *http.Request) {
 func removeHumidity(w http.ResponseWriter, r *http.Request) {
 	spaceData, _ := readLastSpaceData()
 
-	requestSpaceData := spaceapi_spec.Humidity{}
+	requestSpaceData := spaceapiStruct.Humidity{}
 	createEntry(&requestSpaceData, w, r)
 
 	if spaceData.Sensors == nil {
-		spaceData.Sensors = &spaceapi_spec.Sensors{}
+		spaceData.Sensors = &spaceapiStruct.Sensors{}
 	}
 
 	vars := mux.Vars(r)

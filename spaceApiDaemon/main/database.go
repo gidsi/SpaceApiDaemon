@@ -3,13 +3,13 @@ package main
 import (
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/spaceapi-community/go-spaceapi-spec/v13"
 	"log"
 	"time"
 )
 
 type spaceAPIWithTimestamp struct {
-	Data spaceapi_spec.Root
+	Data spaceapiStruct.SpaceAPI013
 	Timestamp int64
 }
 
@@ -35,7 +35,7 @@ func withCollection(collection string, s func(*mgo.Collection) error) error {
 	return s(c)
 }
 
-func writeSpaceData(data spaceapi_spec.Root) {
+func writeSpaceData(data spaceapiStruct.SpaceAPI013) {
 	session := getSession()
 
 	c := session.DB(config.MongoCollection).C("spaceData")
@@ -50,7 +50,7 @@ func writeSpaceData(data spaceapi_spec.Root) {
 	}
 }
 
-func readLastSpaceData() (spaceapi_spec.Root, error) {
+func readLastSpaceData() (spaceapiStruct.SpaceAPI013, error) {
 	result := spaceAPIWithTimestamp{}
 	query := func(c *mgo.Collection) error {
 		return c.Find(bson.M{}).Sort("-timestamp").One(&result)
@@ -130,9 +130,9 @@ func removeToken(token string) {
 }
 
 func writeImportedData(data n39Item) {
-	bar := spaceapi_spec.Root{}
-	bar.State = &spaceapi_spec.State{
-		Lastchange: int(data.Value.Lastchange),
+	bar := spaceapiStruct.SpaceAPI013{}
+	bar.State = &spaceapiStruct.State{
+		Lastchange: float64(data.Value.Lastchange),
 		Open: data.Value.Open,
 	}
 

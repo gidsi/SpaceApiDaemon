@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/gidsi/SpaceApiSpec/v013"
+	"github.com/spaceapi-community/go-spaceapi-spec/v13"
 	"sort"
 )
 
@@ -17,10 +17,10 @@ var historyRoutes = routes{
 }
 
 type itemsSpaceAPIWithTimestamp struct {
-	Items []spaceapi_spec.State `json:"items"`
+	Items []spaceapiStruct.State `json:"items"`
 }
 
-type StateList []spaceapi_spec.State
+type StateList []spaceapiStruct.State
 
 func (s StateList) Len() int {
 	return len(s)
@@ -36,7 +36,7 @@ func getHistoryState(w http.ResponseWriter, _ *http.Request) {
 	spaceData, err := readSpaceData()
 
 	stateSlice := StateList{}
-	filteredStates := map[int]spaceapi_spec.State{}
+	filteredStates := map[float64]spaceapiStruct.State{}
 
 	if err == nil {
 		for i := range spaceData {
