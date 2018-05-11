@@ -144,9 +144,9 @@ function assignNumbers(fracList, n) {
 
 /**
  * Generate n colors with given color stops
- * 
- * @param   {Array}  colorArray 
- * @param   {Number} n          number of colors that need to generate 
+ *
+ * @param   {Array}  colorArray
+ * @param   {Number} n          number of colors that need to generate
  * @returns {Array} array of generated colors in rgb mode
  */
 
