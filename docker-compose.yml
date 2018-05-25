@@ -6,6 +6,7 @@ services:
       - ${DATA_FOLDER}/db:/data/db
   daemon:
     image: spaceapi/daemon
+    build: spaceApiDaemon
     depends_on:
       - database
     expose:
@@ -20,12 +21,11 @@ services:
       - 8080
     environment:
       - API_URL=${SWAGGERURL}
-  caddy:
+  reverse_proxy:
     image: spaceapi/daemonproxy
+    build: reverseProxy
     depends_on:
       - daemon
       - swagger
     ports:
-      - 2015:2015
-    environment:
-      - SPACEAPIURL=${SPACEAPIURL}:2015
+      - 2015:80
