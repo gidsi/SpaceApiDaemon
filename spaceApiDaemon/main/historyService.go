@@ -36,6 +36,7 @@ func getHistoryState(w http.ResponseWriter, _ *http.Request) {
 	spaceData, err := readSpaceData()
 
 	stateSlice := StateList{}
+	stateSlice2 := StateList{}
 	filteredStates := map[float64]spaceapiStruct.State{}
 
 	if err == nil {
@@ -50,7 +51,14 @@ func getHistoryState(w http.ResponseWriter, _ *http.Request) {
 		}
 
 		sort.Sort(stateSlice)
+		lastState := !stateSlice[0].Open
+		for i := range stateSlice {
+            if stateSlice[i].Open != lastState {
+                stateSlice2 = append(stateSlice2, stateSlice[i])
+                lastState = stateSlice[i].Open
+            }
+        }
 
-		returnJSON(w, itemsSpaceAPIWithTimestamp{stateSlice})
+		returnJSON(w, itemsSpaceAPIWithTimestamp{stateSlice2})
 	}
 }
